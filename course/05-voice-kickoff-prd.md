@@ -70,6 +70,19 @@ Sprich das PRD für dein eigenes Projekt ein und speichere es als `PRD.md` in ei
 - **`/voice` funktioniert nicht:** Diktieren braucht ein claude.ai-Konto und ein Mikrofon am selben Gerät; in SSH-Sitzungen geht es nicht. Quelle: https://code.claude.com/docs/de/voice-dictation#requirements
 - **Der Sprachmodus versteht dich schlecht oder antwortet in der falschen Sprache:** Stell die Voice-Sprache unter **Settings → General → Voice → Language** ein (Schritt 2). Andere Sprachen als Englisch sind laut Hilfe-Center noch Beta. Quelle: https://support.claude.com/en/articles/11101966-use-voice-mode
 
+## Sag deiner KI
+
+Füge das nach Schritt 10 in Claude Code in deinem neuen Projektordner ein.
+
+```text
+Prüf mein PRD und das Projekt, das daraus entstanden ist. Ich bin kein Entwickler, erkläre alles in einfachen Worten.
+1. Lies PRD.md in diesem Ordner. Fehlt die Datei, hör auf und sag mir, dass ich zuerst mit dem Prompt aus ~/ailoopwise-blueprint/course/examples/prompt-prd-brainstorm.md in der Claude-App ein PRD machen soll.
+2. Vergleiche es mit ~/ailoopwise-blueprint/course/examples/PRD-TEMPLATE.md und dem Beispiel ~/ailoopwise-blueprint/course/examples/PRD-EXAMPLE-newsletter-tool.md. Nenne fehlende Abschnitte und jede Funktion ohne prüfbares Abnahmekriterium.
+3. Erfinde keine Antworten. Was unklar ist, stellst du mir als Frage. Unter "Offene Fragen" in PRD.md trägst du es erst ein, wenn ich Ja sage.
+4. Prüf, was /new-project angelegt hat: .claude/CLAUDE.md muss die "Regeln, die die KI nie brechen darf" als feste Regeln enthalten, tasks/todo.md jede Funktion als nummerierte Aufgabe mit Abnahmekriterium, tasks/current.md einen ersten Schritt. Nenne, was nicht passt. Gibt es .claude/CLAUDE.md noch nicht, sag mir, dass Schritt 9 fehlt.
+5. Bevor du etwas außerhalb dieses Ordners änderst, erklär es mir. Führ nie git commit oder git push aus, ohne dass ich darum bitte, und zeig nie ein Passwort, einen Schlüssel oder ein Token an.
+```
+
 ---
 
 ## English
@@ -143,3 +156,16 @@ Speak the PRD for your own project and save it as `PRD.md` in a new folder.
 - **`/new-project` is unknown:** the skill isn't at `~/.claude/skills/new-project/SKILL.md`, or the `~/.claude/skills` folder didn't exist when the session started. Check step 1, then restart Claude Code. Source: https://code.claude.com/docs/en/skills#live-change-detection
 - **`/voice` doesn't work:** dictation needs a claude.ai account and a microphone on the same machine; it doesn't work in SSH sessions. Source: https://code.claude.com/docs/en/voice-dictation#requirements
 - **Voice mode misunderstands you or answers in the wrong language:** set the voice language under **Settings → General → Voice → Language** (step 2). Languages other than English are still beta per the help centre. Source: https://support.claude.com/en/articles/11101966-use-voice-mode
+
+### Tell your AI
+
+Paste this into Claude Code in your new project folder after step 10.
+
+```text
+Check my PRD and the project set up from it. I am not a developer, so explain everything in plain words.
+1. Read PRD.md in this folder. If it is missing, stop and tell me to make one first with the prompt in ~/ailoopwise-blueprint/course/examples/prompt-prd-brainstorm.md in the Claude app.
+2. Compare it with ~/ailoopwise-blueprint/course/examples/PRD-TEMPLATE.md and the example ~/ailoopwise-blueprint/course/examples/PRD-EXAMPLE-newsletter-tool.md. List missing sections and every feature without a checkable acceptance criterion.
+3. Do not invent answers. Ask me about anything unclear. Add it under "Open questions" in PRD.md only after I say yes.
+4. Check what /new-project set up: .claude/CLAUDE.md must hold the "Rules the AI must never break" as hard rules, tasks/todo.md every feature as a numbered task with its acceptance criterion, tasks/current.md a first step. List what does not match. If .claude/CLAUDE.md does not exist yet, tell me step 9 is missing.
+5. Explain before you change anything outside this folder. Never run git commit or git push unless I ask, and never print a password, key or token.
+```

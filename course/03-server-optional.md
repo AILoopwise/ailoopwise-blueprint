@@ -106,6 +106,20 @@ Klapp den Laptop zu, verbinde dich per Termius, tippe `tmux attach -t claude` un
 - **Nach einiger Zeit kommst du über Tailscale nicht mehr rein:** Tailscale verlangt regelmäßig eine neue Anmeldung. Für diesen Server in der Admin-Konsole unter **Machines** „Disable Key Expiry“ wählen. Quelle: https://tailscale.com/kb/1028/key-expiry
 - **Die Sitzung ist in der App offline, sobald du Termius schließt:** Claude lief nicht in tmux. `tmux new -As claude` starten, darin Claude neu starten. Quelle: https://code.claude.com/docs/de/remote-control#limitations
 
+## Sag deiner KI
+
+Füge das vor dem Bestellen in Claude Code auf deinem Laptop ein. Claude geht die Checkliste mit dir durch und hält überall an, wo Geld oder deine Konten im Spiel sind.
+
+```text
+Geh mit mir ~/ailoopwise-blueprint/course/examples/server-checklist.md durch, Punkt für Punkt und in dieser Reihenfolge. Ich bin kein Entwickler, erkläre jeden Punkt in einem einfachen Satz.
+1. Zeig mir zu jedem Punkt den passenden Befehl oder Klickweg aus ~/ailoopwise-blueprint/course/03-server-optional.md und warte, bis ich dir das Ergebnis sage, bevor du weitermachst.
+2. HALT vor allem, was Geld kostet oder in einem meiner Konten passiert (Server bestellen, Hetzner, Hostinger, Tailscale, GitHub). Sag mir, was ich dort selbst tun muss, und warte, bis ich sage, dass es erledigt ist.
+3. Lass mich ufw erst einschalten, wenn der Login über die Tailscale-Adresse (100.x.y.z) klappt, sonst sperre ich mich aus.
+4. Ändere selbst nichts, weder in diesem Ordner noch außerhalb. Befehle, die nur etwas anzeigen, darfst du auf diesem Rechner ausführen, nachdem du sie erklärt hast. Alles andere tippe ich selbst.
+5. Öffne oder zeig nie den privaten Schlüssel ~/.ssh/id_ed25519 (weitergegeben wird nur die .pub-Datei), und zeig nie Passwörter, Tokens oder Login-Codes an.
+6. Führ nie git commit oder git push aus, ohne dass ich darum bitte. Nenne mir zum Schluss die Punkte, die noch offen sind.
+```
+
 ---
 
 ## English
@@ -215,3 +229,17 @@ Shut the laptop, connect with Termius, type `tmux attach -t claude` and check th
 - **Login code not accepted:** the browser ran on another device. Copy the URL with `c`, sign in, paste the code in the terminal. If pasting fails, use `claude auth login`. Source: https://code.claude.com/docs/en/troubleshoot-install#oauth-login-fails-in-wsl2-ssh-or-containers
 - **After a while you can't get in over Tailscale:** Tailscale requires periodic re-authentication. For this server choose "Disable Key Expiry" under **Machines** in the admin console. Source: https://tailscale.com/kb/1028/key-expiry
 - **The session goes offline in the app as soon as you close Termius:** Claude wasn't running inside tmux. Start `tmux new -As claude` and restart Claude inside it. Source: https://code.claude.com/docs/en/remote-control#limitations
+
+### Tell your AI
+
+Paste this into Claude Code on your laptop before you order anything. Claude walks you through the checklist and stops wherever money or your accounts are involved.
+
+```text
+Walk me through ~/ailoopwise-blueprint/course/examples/server-checklist.md, one item at a time and in its order. I am not a developer, so explain each item in one plain sentence.
+1. For each item, show me the matching command or click path from ~/ailoopwise-blueprint/course/03-server-optional.md, then wait until I tell you the result before you go on.
+2. STOP before anything that costs money or happens in one of my accounts (ordering the server, Hetzner, Hostinger, Tailscale, GitHub). Tell me what to do there myself and wait until I say it is done.
+3. Do not let me switch on ufw before login over the Tailscale address (100.x.y.z) works, or I lock myself out.
+4. Change nothing yourself, in this folder or outside it. You may run commands that only display something on this computer, after explaining them. I type everything else myself.
+5. Never open or print the private key ~/.ssh/id_ed25519 (only the .pub file is shared), and never print passwords, tokens or login codes.
+6. Never run git commit or git push unless I ask. At the end, list the items that are still open.
+```

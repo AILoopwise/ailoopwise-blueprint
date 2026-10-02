@@ -72,6 +72,19 @@ Die Vorlagen des Blueprints sind englisch. Du kannst deine Regeln trotzdem auf D
 - **`claude` im VS-Code-Terminal wird nicht gefunden:** Die Erweiterung bringt eine eigene Kopie mit, legt `claude` aber nicht in deinen Suchpfad. Für das Terminal brauchst du die Installation aus Folge 1.
 - **Claude findet den Blueprint-Ordner nicht:** Sag es ihm direkt: `My blueprint folder is at ~/ailoopwise-blueprint/blueprint/` (aus `Install-guide.md`, Troubleshooting).
 
+## Sag deiner KI
+
+Starte im neuen Projektordner eine neue Session und füge das ein. Claude prüft, was Folge 2 angelegt hat, und ändert nichts ohne dein Ja.
+
+```text
+Prüf das Projekt, das du mir gerade eingerichtet hast. Ich bin kein Entwickler, erkläre alles in einfachen Worten.
+1. Prüf, ob dieser Ordner .claude/CLAUDE.md, tasks/current.md, tasks/lessons.md und tasks/todo.md enthält. Nenne, was fehlt.
+2. Nenne die festen Regeln aus .claude/CLAUDE.md in höchstens drei Zeilen.
+3. Vergleiche meine CLAUDE.md mit ~/ailoopwise-blueprint/course/examples/CLAUDE-example.md. Sag mir, welche Abschnitte bei mir fehlen und welche meiner Regeln zu vage sind ("vorsichtig sein" ist vage, "nie an echte Kunden mailen" nicht).
+4. Schlag bessere Formulierungen vor, aber ändere erst etwas, wenn ich Ja sage, und nur in diesem Projektordner.
+5. Ändere nichts in ~/ailoopwise-blueprint. Führ nie git commit oder git push aus, ohne dass ich darum bitte, und zeig nie ein Passwort, einen Schlüssel oder ein Token an.
+```
+
 ---
 
 ## English
@@ -145,3 +158,16 @@ Open your new project's `.claude/CLAUDE.md` and read your hard rules yourself on
 - **The extension won't install:** check your VS Code version and install straight from the Marketplace: https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code
 - **`claude` not found in the VS Code terminal:** the extension ships its own copy but does not put `claude` on your path. For the terminal you need the install from episode 1.
 - **Claude can't find the blueprint folder:** tell it directly: `My blueprint folder is at ~/ailoopwise-blueprint/blueprint/` (from `Install-guide.md`, troubleshooting).
+
+### Tell your AI
+
+Start a new session in your new project folder and paste this. Claude checks what episode 2 set up and changes nothing without your yes.
+
+```text
+Check the project you just set up for me. I am not a developer, so explain everything in plain words.
+1. Check that this folder contains .claude/CLAUDE.md, tasks/current.md, tasks/lessons.md and tasks/todo.md. List what is missing.
+2. List the hard rules in .claude/CLAUDE.md in three lines at most.
+3. Compare my CLAUDE.md with ~/ailoopwise-blueprint/course/examples/CLAUDE-example.md. Tell me which sections mine lacks and which of my rules are too vague ("be careful" is vague, "never email real customers" is not).
+4. Suggest better wording, but change nothing until I say yes, and only inside this project folder.
+5. Change nothing in ~/ailoopwise-blueprint. Never run git commit or git push unless I ask, and never print a password, key or token.
+```

@@ -20,6 +20,7 @@ Das ist die Textanleitung zu den sechs Folgen der Videoreihe. Jede Seite ist die
 - Schau zuerst das Video, damit du weißt, wie es aussieht. Dann arbeite die Seite Schritt für Schritt ab.
 - Befehle stehen in grauen Blöcken, Prompts zum Einfügen in `text`-Blöcken. Kopier sie vollständig.
 - Die Installationsbefehle für Claude Code, Docker und Tailscale stehen hier absichtlich nicht. Sie ändern sich; nimm immer die verlinkte offizielle Seite.
+- Folge 1 bis 5 enden mit „Sag deiner KI“: einem Prompt, den du in Claude Code einfügst, damit es die Schritte der Folge mit dir prüft. In Folge 6 ist das der Fortsetzungs-Prompt.
 - Hakt etwas, sieh zuerst unter „Wenn etwas hakt“ am Ende der Seite nach.
 - Alle Dateien zum Kopieren liegen in [examples/](examples/): PRD-Vorlage und -Beispiel, eine Projekt-CLAUDE.md, die drei Aufgabendateien, der Brainstorming-Prompt, der Fortsetzungs-Prompt und die Server-Checkliste.
 
@@ -51,6 +52,7 @@ This is the text guide to the six episodes of the video series. Each page is the
 - Watch the video first so you know what it looks like. Then work through the page step by step.
 - Commands sit in grey blocks, prompts to paste in `text` blocks. Copy them in full.
 - The install commands for Claude Code, Docker and Tailscale are deliberately not printed here. They change; always use the linked official page.
+- Episodes 1 to 5 end with "Tell your AI": a prompt you paste into Claude Code so it checks the episode's steps with you. In episode 6 that is the continuation prompt.
 - If something breaks, check "If something goes wrong" at the end of the page first.
 - Every file to copy lives in [examples/](examples/): PRD template and example, a project CLAUDE.md, the three task files, the brainstorming prompt, the continuation prompt and the server checklist.
 

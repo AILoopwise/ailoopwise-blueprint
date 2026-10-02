@@ -94,6 +94,19 @@ verifyToken from src/lib/tokens.ts; on success set the subscriber's status to "u
 - **`git push` fragt nach einem Passwort und scheitert:** GitHub nimmt keine Passwörter mehr. Gib ein Personal Access Token ein oder nutze den Git Credential Manager. Quelle: https://docs.github.com/de/get-started/git-basics/about-remote-repositories
 - **`git push` wird abgelehnt (rejected):** Das Repo wurde auf GitHub mit README oder Lizenz angelegt. Leg es leer an. Quelle: https://docs.github.com/de/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github
 
+## Sag deiner KI
+
+Füge das in Claude Code in deinem Projektordner ein. Claude prüft die Leitplanken mit dir.
+
+```text
+Prüf mit mir die Leitplanken in diesem Projekt. Ich bin kein Entwickler, erkläre alles in einfachen Worten.
+1. Lies .claude/settings.json (stehen dort keine Hooks, auch ~/.claude/settings.json) und sag mir, welche Hooks eingetragen sind und welche davon wirklich blockieren. Die Tabelle dazu steht in ~/ailoopwise-blueprint/course/04-guardrails.md.
+2. Teste einen Wächter. Gibt es hier schon eine .env, überspring den Test und sag es mir. Sonst versuch, eine Datei .env mit dem Inhalt TEST=1 anzulegen, und nenne mir die genaue Meldung. Wurde die Datei trotzdem angelegt, sag das deutlich.
+3. Vergleiche tasks/current.md, tasks/lessons.md und tasks/todo.md mit den ausgefüllten Beispielen in ~/ailoopwise-blueprint/course/examples/. Sag mir, was bei mir fehlt, vor allem eine "Exact Next Action", mit der eine frische Session ohne Rückfragen weitermachen kann.
+4. Prüf, ob .gitignore die Zeilen .claude/settings.local.json, .mcp.json und .env enthält. Zeig mir, was fehlt, und ergänze es erst, wenn ich Ja sage.
+5. Bevor du etwas außerhalb dieses Ordners änderst, erklär es mir. Zeig nie den Inhalt von .env oder .mcp.json an. Führ nie git commit oder git push aus, ohne dass ich darum bitte, und zeig nie ein Passwort, einen Schlüssel oder ein Token an.
+```
+
 ---
 
 ## English
@@ -191,3 +204,16 @@ Open your repo on github.com and check: it is private, and `.mcp.json` and `.env
 - **Claude says "tests pass" but you saw no run:** only type and test failures block; the lint and format warnings from `quality-check.sh` go to the debug log only. Start with `claude --debug` and read `~/.claude/debug/<session-id>.txt`, or have Claude run `npm test` visibly. Source: https://code.claude.com/docs/en/hooks#debug-hooks
 - **`git push` asks for a password and fails:** GitHub no longer accepts passwords. Enter a personal access token or use Git Credential Manager. Source: https://docs.github.com/en/get-started/git-basics/about-remote-repositories
 - **`git push` is rejected:** the repo was created on GitHub with a README or licence. Create it empty. Source: https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github
+
+### Tell your AI
+
+Paste this into Claude Code in your project folder. Claude checks the guardrails with you.
+
+```text
+Check the guardrails in this project with me. I am not a developer, so explain everything in plain words.
+1. Read .claude/settings.json (if it lists no hooks, also ~/.claude/settings.json) and tell me which hooks are registered and which of them really block. The table is in ~/ailoopwise-blueprint/course/04-guardrails.md.
+2. Test one guard. If a .env already exists here, skip the test and tell me. Otherwise try to create a file .env containing TEST=1 and tell me the exact message you got. If the file got created anyway, say so plainly.
+3. Compare tasks/current.md, tasks/lessons.md and tasks/todo.md with the filled examples in ~/ailoopwise-blueprint/course/examples/. Tell me what mine are missing, above all an "Exact Next Action" a fresh session could follow without asking me.
+4. Check that .gitignore contains the lines .claude/settings.local.json, .mcp.json and .env. Show me what is missing and add it only after I say yes.
+5. Explain before you change anything outside this folder. Never show the contents of .env or .mcp.json. Never run git commit or git push unless I ask, and never print a password, key or token.
+```

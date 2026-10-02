@@ -69,6 +69,19 @@ Tippe `claude --version` in ein neues Terminalfenster. Erscheint eine Versionsnu
 - **`403 Forbidden` nach dem Login:** Prüfe unter https://claude.ai/settings, ob dein Abo aktiv ist. Mit dem Gratis-Plan geht es nicht.
 - **Der Browser öffnet sich nicht oder der Code wird als ungültig abgelehnt:** Drücke beim Login `c`, um die Anmelde-URL zu kopieren, öffne sie selbst im Browser und schließe den Login zügig ab.
 
+## Sag deiner KI
+
+Wenn alle Schritte erledigt sind, starte `claude` noch einmal im Ordner `erste-session` und füge das ein:
+
+```text
+Ich habe gerade Claude Code installiert und bin kein Entwickler. Prüf mein Setup und erkläre alles in einfachen Worten.
+1. Führ claude --version, git --version und jq --version aus und sag mir, was jedes Ergebnis bedeutet. Installier nichts selbst. Fehlt etwas, sag es mir, und ich installiere es über den Link in der Anleitung.
+2. Prüf, ob es den Ordner ~/ailoopwise-blueprint gibt und ob darin blueprint/MASTER-BLUEPRINT.md liegt. Wenn nicht, sag mir, was ich korrigieren muss. Verschieb und lade nichts selbst.
+3. Lies ~/ailoopwise-blueprint/course/examples/CLAUDE-example.md und erkläre mir den Abschnitt "Hard rules" in drei kurzen Zeilen.
+4. In dieser Session liest du nur. Leg keine Datei an und ändere oder lösche nichts, weder in diesem Ordner noch außerhalb.
+5. Führ nie git commit oder git push aus, ohne dass ich darum bitte, und zeig nie ein Passwort, einen Schlüssel oder ein Token an.
+```
+
 ---
 
 ## English
@@ -141,3 +154,16 @@ Type `claude --version` in a fresh terminal window. If a version number appears,
 - **Windows says `'irm' is not recognized` or `The token '&&' is not a valid statement separator`:** you copied the command for the other shell (PowerShell vs CMD). Use the command on the setup page for the shell you're in.
 - **`403 Forbidden` after login:** check at https://claude.ai/settings that your subscription is active. Claude Code isn't part of the free tier.
 - **The browser doesn't open, or the code is rejected as invalid:** press `c` at the login prompt to copy the sign-in URL, open it yourself, and finish the login quickly.
+
+### Tell your AI
+
+When every step is done, start `claude` again in your `first-session` folder and paste this:
+
+```text
+I just installed Claude Code and I am not a developer. Check my setup and explain everything in plain words.
+1. Run claude --version, git --version and jq --version and tell me what each result means. Install nothing yourself. If one is missing, tell me, and I will install it from the link in the guide.
+2. Check that the folder ~/ailoopwise-blueprint exists and contains blueprint/MASTER-BLUEPRINT.md. If not, tell me what to fix. Do not move or download anything yourself.
+3. Read ~/ailoopwise-blueprint/course/examples/CLAUDE-example.md and explain its "Hard rules" section in three short lines.
+4. In this session you only read. Create no file and change or delete nothing, in this folder or outside it.
+5. Never run git commit or git push unless I ask, and never print a password, key or token.
+```
