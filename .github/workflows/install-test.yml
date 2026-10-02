@@ -1,0 +1,104 @@
+name: install-test
+
+# Runs the install and the safety-hook tests on Linux, macOS and Windows (Git Bash),
+# the three systems the README tells people to use.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+# Least privilege: jobs get a read-only token unless a job asks for more (only release does).
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: jq
+        run: |
+          if ! command -v jq >/dev/null; then
+            case "$RUNNER_OS" in
+              macOS) brew install jq ;;
+              Windows) choco install jq -y ;;
+              *) sudo apt-get install -y jq ;;
+            esac
+          fi
+          jq --version
+
+      - name: Syntax check of every script
+        run: find blueprint -name '*.sh' -print0 | xargs -0 -n1 bash -n
+
+      - name: Safety-hook tests
+        working-directory: blueprint/hooks
+        run: |
+          bash block-dangerous-commands.matrix.sh ./block-dangerous-commands.sh
+          bash defer-to-project.matrix.sh
+          bash edit-write-hooks.matrix.sh .
+
+      # macOS ships bash 3.2 as /bin/bash; the hooks must work there too, not only with a newer bash.
+      # /bin goes first on PATH so the plain `bash` the matrices call is /bin/bash as well.
+      - name: Safety-hook tests with Apple's bash 3.2 (macOS only)
+        if: runner.os == 'macOS'
+        working-directory: blueprint/hooks
+        run: |
+          export PATH="/bin:$PATH"
+          /bin/bash -c 'echo "bash $BASH_VERSION"'
+          /bin/bash block-dangerous-commands.matrix.sh ./block-dangerous-commands.sh
+          /bin/bash defer-to-project.matrix.sh
+          /bin/bash edit-write-hooks.matrix.sh .
+
+      - name: Install twice into a fresh home folder (with a space in its path)
+        run: |
+          export HOME="$RUNNER_TEMP/test home"
+          mkdir -p "$HOME/.claude"
+          echo '{"model":"keep-me"}' > "$HOME/.claude/settings.json"
+          cp -R "$GITHUB_WORKSPACE" "$HOME/ailoopwise-blueprint"
+          bash "$HOME/ailoopwise-blueprint/blueprint/scripts/bootstrap.sh"
+          bash "$HOME/ailoopwise-blueprint/blueprint/scripts/bootstrap.sh"
+          s="$HOME/.claude/settings.json"
+          # jq -e sets the exit code from the result, so Windows CRLF output cannot break the comparison.
+          jq -e '.model == "keep-me"' "$s"
+          jq -e '[.hooks.PreToolUse[]?.hooks[]?.command] | length > 0' "$s"
+          jq -e '[.hooks[][].hooks[].command] | group_by(.) | map(select(length > 1)) | length == 0' "$s"
+          hook="$HOME/.claude/hooks/block-dangerous-commands.sh"
+          rc=0; printf '%s' '{"tool_name":"Bash","tool_input":{"command":"rm -rf ."}}' | bash "$hook" >/dev/null 2>&1 || rc=$?
+          test "$rc" -eq 2
+          printf '%s' '{"tool_name":"Bash","tool_input":{"command":"ls -la"}}' | bash "$hook"
+          echo "install test passed on $RUNNER_OS"
+
+  # On a version tag (v…), after the tests pass on all three systems: attach a ZIP whose top folder is
+  # already named ailoopwise-blueprint, so it unpacks to the name the README asks for.
+  # Stable download link: https://github.com/<owner>/ailoopwise-blueprint/releases/latest/download/ailoopwise-blueprint.zip
+  # SHA256SUMS sits next to it, so a download can be checked with: sha256sum -c SHA256SUMS
+  # The "release" environment (Settings > Environments) must list the owner as required reviewer, so
+  # this job waits for approval. GitHub creates a missing environment without any protection.
+  release:
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build ZIP and publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git archive --format=zip --prefix=ailoopwise-blueprint/ -o ailoopwise-blueprint.zip HEAD
+          sha256sum ailoopwise-blueprint.zip > SHA256SUMS
+          gh release create "$GITHUB_REF_NAME" ailoopwise-blueprint.zip SHA256SUMS --title "$GITHUB_REF_NAME" --generate-notes

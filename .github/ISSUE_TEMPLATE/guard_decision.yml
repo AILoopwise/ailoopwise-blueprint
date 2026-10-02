@@ -1,0 +1,40 @@
+name: Command guard decision
+description: The guard blocked a harmless command, or let a dangerous one through.
+labels: [guard]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If the guard let a destructive command through and you think others could be harmed, please report it privately via the Security tab instead.
+  - type: textarea
+    id: command
+    attributes:
+      label: The exact command
+      description: Copy it exactly as Claude Code ran it. Replace secrets with `xxx`.
+      render: bash
+    validations:
+      required: true
+  - type: dropdown
+    id: expected
+    attributes:
+      label: What should have happened?
+      options:
+        - It should have been allowed (it was blocked)
+        - It should have been blocked (it was allowed)
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why?
+      description: What the command does in your project.
+  - type: dropdown
+    id: os
+    attributes:
+      label: Your system
+      options:
+        - macOS
+        - Windows with WSL 2
+        - Windows with Git for Windows
+        - Linux
+        - Other

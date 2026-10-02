@@ -1,0 +1,8 @@
+# Keep Unix line endings on every OS: the hooks and scripts are bash, and bash on Windows
+# (Git Bash) fails on CRLF. Without this, a Windows checkout breaks every .sh file.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.gif binary
+*.webp binary
+*.ico binary

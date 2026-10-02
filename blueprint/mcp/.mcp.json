@@ -1,0 +1,33 @@
+{
+  "mcpServers": {
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_TOKEN}",
+        "X-MCP-Readonly": "true"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@0.0.82"
+      ]
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": [
+        "@brave/brave-search-mcp-server@2.1.4"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      }
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "@upstash/context7-mcp@4.1.1"
+      ]
+    }
+  }
+}
