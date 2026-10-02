@@ -2,7 +2,7 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 3](03-server-optional.md) · Weiter: [Folge 5](05-voice-kickoff-prd.md)
 
-**In dieser Folge (≈ 40 Min.):**
+**In dieser Folge (≈ 40 Min. zum Umsetzen):**
 
 - Du weißt, welche Hooks wirklich blockieren und welche nur prüfen.
 - Drei Aufgabendateien, mit denen jede Session weiß, wo ihr steht.
@@ -119,7 +119,7 @@ Prüf mit mir die Leitplanken in diesem Projekt. Ich bin kein Entwickler, erklä
 
 [Overview](README.md) · Back: [Episode 3](03-server-optional.md) · Next: [Episode 5](05-voice-kickoff-prd.md)
 
-**In this episode (≈ 40 min):**
+**In this episode (≈ 40 min of hands-on work):**
 
 - You know which hooks really block and which only check.
 - Three task files that tell every session where you stand.

@@ -2,7 +2,7 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 1](01-installation.md) · Weiter: [Folge 3](03-server-optional.md)
 
-**In dieser Folge (≈ 30 Min.):**
+**In dieser Folge (≈ 30 Min. zum Umsetzen):**
 
 - VS Code mit der Claude-Code-Erweiterung, angemeldet.
 - Dein erstes Projekt, eingerichtet mit einem einzigen Prompt.
@@ -97,7 +97,7 @@ Prüf das Projekt, das du mir gerade eingerichtet hast. Ich bin kein Entwickler,
 
 [Overview](README.md) · Back: [Episode 1](01-installation.md) · Next: [Episode 3](03-server-optional.md)
 
-**In this episode (≈ 30 min):**
+**In this episode (≈ 30 min of hands-on work):**
 
 - VS Code with the Claude Code extension, signed in.
 - Your first project, set up from one single prompt.

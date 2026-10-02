@@ -2,7 +2,7 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Weiter: [Folge 2](02-desktop-setup.md)
 
-**In dieser Folge (≈ 20 Min.):**
+**In dieser Folge (≈ 20 Min. zum Umsetzen):**
 
 - Claude Code läuft auf deinem Rechner, angemeldet mit deinem Konto.
 - Deine erste Session in einem leeren Übungsordner.
@@ -94,7 +94,7 @@ Ich habe gerade Claude Code installiert und bin kein Entwickler. Prüf mein Setu
 
 [Overview](README.md) · Next: [Episode 2](02-desktop-setup.md)
 
-**In this episode (≈ 20 min):**
+**In this episode (≈ 20 min of hands-on work):**
 
 - Claude Code runs on your computer, signed in to your account.
 - Your first session in an empty practice folder.

@@ -2,7 +2,7 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 4](04-guardrails.md) · Weiter: [Folge 6](06-long-sessions.md)
 
-**In dieser Folge (≈ 45 Min.):**
+**In dieser Folge (≈ 45 Min. zum Umsetzen):**
 
 - Ein PRD für dein Projekt, im Sprachchat auf dem Handy entstanden.
 - Einen Projektordner, den `/new-project` aus diesem PRD eingerichtet hat.
@@ -95,7 +95,7 @@ Prüf mein PRD und das Projekt, das daraus entstanden ist. Ich bin kein Entwickl
 
 [Overview](README.md) · Back: [Episode 4](04-guardrails.md) · Next: [Episode 6](06-long-sessions.md)
 
-**In this episode (≈ 45 min):**
+**In this episode (≈ 45 min of hands-on work):**
 
 - A PRD for your project, made by voice chat on your phone.
 - A project folder that `/new-project` set up from that PRD.

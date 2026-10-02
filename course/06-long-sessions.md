@@ -2,7 +2,7 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 5](05-voice-kickoff-prd.md)
 
-**In dieser Folge (≈ 20 Min.):**
+**In dieser Folge (≈ 20 Min. zum Umsetzen):**
 
 - Einen festen Rhythmus: eine Aufgabe pro Session, dann `/clear`.
 - Unter-Agenten für Recherche und einen Reviewer, der deine Änderungen prüft.
@@ -54,7 +54,7 @@ Die Wand: Der Workflow sitzt erst nach ein paar Wochen. Bis dahin verlierst du S
 
 ## Beispiel zum Kopieren
 
-Der Fortsetzungs-Prompt steht vollständig unten unter „Sag deiner KI“, mit einem Beispielergebnis in [examples/prompt-continuation.md](examples/prompt-continuation.md).
+Den vollständigen Fortsetzungs-Prompt findest du im Abschnitt „Sag deiner KI“, mit einem Beispielergebnis in [examples/prompt-continuation.md](examples/prompt-continuation.md).
 
 ## Bevor du zur nächsten Folge gehst
 
@@ -86,7 +86,7 @@ Wir beenden diese Session. Bevor ich /clear eingebe:
 
 [Overview](README.md) · Back: [Episode 5](05-voice-kickoff-prd.md)
 
-**In this episode (≈ 20 min):**
+**In this episode (≈ 20 min of hands-on work):**
 
 - A fixed rhythm: one task per session, then `/clear`.
 - Subagents for research and a reviewer that checks your changes.
@@ -138,7 +138,7 @@ The wall: the workflow only clicks after a few weeks. Until then you'll lose ses
 
 ### Example to copy
 
-The full continuation prompt is below under "Tell your AI", with an example result in [examples/prompt-continuation.md](examples/prompt-continuation.md).
+The full continuation prompt is in the section "Tell your AI", with an example result in [examples/prompt-continuation.md](examples/prompt-continuation.md).
 
 ### Before the next episode
 
