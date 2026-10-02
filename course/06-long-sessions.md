@@ -2,6 +2,12 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 5](05-voice-kickoff-prd.md)
 
+**In dieser Folge (≈ 20 Min.):**
+
+- Einen festen Rhythmus: eine Aufgabe pro Session, dann `/clear`.
+- Unter-Agenten für Recherche und einen Reviewer, der deine Änderungen prüft.
+- Einen Fortsetzungs-Prompt, mit dem die nächste Session ohne Rückfragen weitermacht.
+
 Wer stundenlang in derselben Session arbeitet, verbrennt Token, und die KI wird ungenauer. Die Doku sagt es direkt: „performance degrades as it fills“ ([Quelle](https://code.claude.com/docs/de/best-practices)). Besser sind kurze Zyklen: Aufwändige Teilaufgaben gehen an Unter-Agenten, am Ende prüft ein unabhängiger Reviewer-Agent, dann lässt du dir einen Fortsetzungs-Prompt geben und löschst mit `/clear` den Verlauf. Das Wissen steckt in deinen Textdateien. Die frische Session bekommt den neuen Prompt und arbeitet ohne Altlasten weiter.
 
 Die Wand: Der Workflow sitzt erst nach ein paar Wochen. Bis dahin verlierst du Sessions.
@@ -48,14 +54,7 @@ Die Wand: Der Workflow sitzt erst nach ein paar Wochen. Bis dahin verlierst du S
 
 ## Beispiel zum Kopieren
 
-Der vollständige Prompt steht in [examples/prompt-continuation.md](examples/prompt-continuation.md). Sein Kern:
-
-```text
-Wir beenden diese Session. Bevor ich /clear eingebe:
-1. Aktualisiere tasks/current.md: Status, getroffene Entscheidungen, geänderte Dateien, und unter "Exact Next Action" den nächsten Schritt so genau, dass eine frische Session ohne Rückfragen weitermachen kann.
-[...]
-5. Gib mir zum Schluss einen Fortsetzungs-Prompt in einem Codeblock, höchstens zehn Zeilen. Er beginnt mit "Lies tasks/current.md, tasks/lessons.md und tasks/todo.md."
-```
+Der Fortsetzungs-Prompt steht vollständig unten unter „Sag deiner KI“, mit einem Beispielergebnis in [examples/prompt-continuation.md](examples/prompt-continuation.md).
 
 ## Bevor du zur nächsten Folge gehst
 
@@ -68,11 +67,30 @@ Es gibt keine nächste Folge. Beende deine nächste Session mit dem Fortsetzungs
 - **Claude recherchiert selbst, statt den Unter-Agenten zu nehmen:** Nur beim Namen nennen ist ein Vorschlag. Die @-Erwähnung (`@agent-researcher`) sorgt dafür, dass genau dieser Agent läuft. Quelle: https://code.claude.com/docs/de/sub-agents#invoke-subagents-explicitly
 - **In einer sehr langen Session vergisst Claude frühe Anweisungen:** Beim automatischen Zusammenfassen können Details vom Anfang verloren gehen. Dauerhafte Regeln gehören in die CLAUDE.md, nicht in den Chat. Quelle: https://code.claude.com/docs/de/how-claude-code-works
 
+## Sag deiner KI
+
+Füge das am Ende einer Session ein, **bevor** du `/clear` tippst. Claude sichert den Stand in den drei Aufgabendateien und gibt dir einen kurzen Prompt für die nächste Session zurück.
+
+```text
+Wir beenden diese Session. Bevor ich /clear eingebe:
+1. Aktualisiere tasks/current.md: Status, getroffene Entscheidungen, geänderte Dateien, und unter "Exact Next Action" den nächsten Schritt so genau, dass eine frische Session ohne Rückfragen weitermachen kann (Dateipfade, Funktionsnamen, erwartetes Ergebnis).
+2. Trag in tasks/lessons.md jede Regel ein, die wir heute aus einem Fehler gelernt haben, im Format "Tu X / Tu nie Y ... — gelernt nach ...". Gab es keine, schreib nichts.
+3. Hake in tasks/todo.md nur ab, was fertig UND geprüft ist.
+4. Sag mir, welche Tests, Lint- und Build-Befehle du in dieser Session wirklich ausgeführt hast und mit welchem Ergebnis. Was du nicht ausgeführt hast, nennst du ausdrücklich.
+5. Gib mir zum Schluss einen Fortsetzungs-Prompt in einem Codeblock, höchstens zehn Zeilen. Er beginnt mit "Lies tasks/current.md, tasks/lessons.md und tasks/todo.md." und beschreibt dann genau den nächsten Schritt.
+```
+
 ---
 
 ## English
 
 [Overview](README.md) · Back: [Episode 5](05-voice-kickoff-prd.md)
+
+**In this episode (≈ 20 min):**
+
+- A fixed rhythm: one task per session, then `/clear`.
+- Subagents for research and a reviewer that checks your changes.
+- A continuation prompt so the next session continues without questions.
 
 Working for hours in the same session burns tokens, and the AI gets less precise. The docs say it plainly: "performance degrades as it fills" ([source](https://code.claude.com/docs/en/best-practices)). Short cycles work better: heavy sub-tasks go to subagents, a separate reviewer agent checks at the end, then you have Claude write a continuation prompt and wipe the history with `/clear`. The knowledge lives in your text files. The fresh session gets the new prompt and carries on with no baggage.
 
@@ -120,14 +138,7 @@ The wall: the workflow only clicks after a few weeks. Until then you'll lose ses
 
 ### Example to copy
 
-The full prompt is in [examples/prompt-continuation.md](examples/prompt-continuation.md). Its core:
-
-```text
-We are ending this session. Before I type /clear:
-1. Update tasks/current.md: status, decisions made, files changed, and under "Exact Next Action" the next step, precise enough that a fresh session can continue without asking me anything.
-[...]
-5. Finally, give me a continuation prompt in a code block, ten lines at most. It starts with "Read tasks/current.md, tasks/lessons.md and tasks/todo.md."
-```
+The full continuation prompt is below under "Tell your AI", with an example result in [examples/prompt-continuation.md](examples/prompt-continuation.md).
 
 ### Before the next episode
 
@@ -139,3 +150,16 @@ There is no next episode. End your next session with the continuation prompt and
 - **After `/clear` you're missing something from the old conversation:** `/resume` brings it back. Tip: give it a name with `/rename` first so it's easier to find. Source: https://code.claude.com/docs/en/commands
 - **Claude researches itself instead of using the subagent:** naming it is a suggestion. The @-mention (`@agent-researcher`) makes sure exactly that agent runs. Source: https://code.claude.com/docs/en/sub-agents#invoke-subagents-explicitly
 - **In a very long session Claude forgets early instructions:** automatic summarising can drop details from the start. Permanent rules belong in CLAUDE.md, not in the chat. Source: https://code.claude.com/docs/en/how-claude-code-works
+
+### Tell your AI
+
+Paste this at the end of a session, **before** you type `/clear`. Claude saves the state into the three task files and hands you a short prompt for the next session.
+
+```text
+We are ending this session. Before I type /clear:
+1. Update tasks/current.md: status, decisions made, files changed, and under "Exact Next Action" the next step, precise enough that a fresh session can continue without asking me anything (file paths, function names, expected result).
+2. Add to tasks/lessons.md every rule we learned from a mistake today, in the format "Do X / Don't do Y ... — learned after ...". If there were none, write nothing.
+3. In tasks/todo.md, tick off only what is finished AND checked.
+4. Tell me which test, lint and build commands you actually ran in this session and what the result was. Name explicitly anything you did not run.
+5. Finally, give me a continuation prompt in a code block, ten lines at most. It starts with "Read tasks/current.md, tasks/lessons.md and tasks/todo.md." and then describes exactly the next step.
+```

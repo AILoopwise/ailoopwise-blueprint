@@ -2,6 +2,12 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Weiter: [Folge 2](02-desktop-setup.md)
 
+**In dieser Folge (≈ 20 Min.):**
+
+- Claude Code läuft auf deinem Rechner, angemeldet mit deinem Konto.
+- Deine erste Session in einem leeren Übungsordner.
+- Das Setup-Paket liegt bereit unter `~/ailoopwise-blueprint`.
+
 Prompts in einen Browser-Tab zu tippen stößt bei echten Projekten schnell an Grenzen. Mit diesem Setup haben wir die Plattform für liveinthemovent.com entwickelt, über die mittlerweile über 8.000 Ticketverkäufe laufen: iOS- und Android-Apps, Ticketscanner für den Einlass, Marketing im Hintergrund. Die KI schreibt nicht alles beim ersten Versuch richtig. Mit Leitplanken spart sie trotzdem sehr viel Zeit. In sechs Folgen gehst du vom leeren Ordner zu einem System, das deine Regeln kennt und Aufgaben allein erledigt. Folge 3 (Server) ist optional.
 
 Ehrlich vorweg: Die erste App baust du an einem Abend. Sie am Laufen zu halten ist der eigentliche Job.
@@ -87,6 +93,12 @@ Ich habe gerade Claude Code installiert und bin kein Entwickler. Prüf mein Setu
 ## English
 
 [Overview](README.md) · Next: [Episode 2](02-desktop-setup.md)
+
+**In this episode (≈ 20 min):**
+
+- Claude Code runs on your computer, signed in to your account.
+- Your first session in an empty practice folder.
+- The setup pack ready in `~/ailoopwise-blueprint`.
 
 Typing prompts into a browser tab hits a wall fast when you're building something real. We built the platform for liveinthemovent.com with this setup, and it has handled more than 8,000 ticket sales: iOS and Android apps, ticket scanners for the door, marketing in the background. The AI doesn't get everything right first time. With guardrails it still saves you an enormous amount of time. Over six episodes you go from an empty folder to a system that knows your rules and does tasks on its own. Episode 3 (server) is optional.
 

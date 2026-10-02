@@ -2,6 +2,12 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 2](02-desktop-setup.md) · Weiter: [Folge 4](04-guardrails.md)
 
+**In dieser Folge (≈ 90 Min.):**
+
+- Einen eigenen Server, nur über dein privates Tailscale-Netz erreichbar.
+- Claude Code in einem abgeschotteten Container, ohne offene Ports.
+- Eine Session, die weiterläuft, gesteuert von deinem Handy.
+
 **Diese Folge ist ein Extra.** Ist sie dir zu technisch, überspring sie. Die Folgen 4 bis 6 brauchen keinen Server.
 
 Du mietest einen kleinen virtuellen Server (Hetzner oder Hostinger) und lässt Claude Code dort in einem abgeschotteten Docker-Container laufen. Tailscale macht den Server von außen unsichtbar. Auf dem Handy öffnest du Termius, hängst dich an eine tmux-Session, damit nichts abreißt, und mit `/remote-control` steuerst du die Session auch aus der Claude-App. Der Laptop kann zu bleiben.
@@ -125,6 +131,12 @@ Geh mit mir ~/ailoopwise-blueprint/course/examples/server-checklist.md durch, Pu
 ## English
 
 [Overview](README.md) · Back: [Episode 2](02-desktop-setup.md) · Next: [Episode 4](04-guardrails.md)
+
+**In this episode (≈ 90 min):**
+
+- Your own server, reachable only through your private Tailscale network.
+- Claude Code in a sealed-off container with no open ports.
+- A session that keeps running while you steer it by phone.
 
 **This episode is an extra.** If it feels too technical, skip it. Episodes 4 to 6 don't need a server.
 

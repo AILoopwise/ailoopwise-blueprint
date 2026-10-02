@@ -2,6 +2,12 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 1](01-installation.md) · Weiter: [Folge 3](03-server-optional.md)
 
+**In dieser Folge (≈ 30 Min.):**
+
+- VS Code mit der Claude-Code-Erweiterung, angemeldet.
+- Dein erstes Projekt, eingerichtet mit einem einzigen Prompt.
+- Feste Regeln, was die KI in deinem Projekt nie tun darf.
+
 Wer KI wirklich für sich arbeiten lassen will, chattet nicht mehr im Browser. Du richtest sie direkt in deiner Arbeitsumgebung ein: VS Code öffnen, die offizielle Claude-Code-Erweiterung installieren, mit deinem claude.ai-Konto verbinden. Ab dann sieht die KI den Inhalt deiner Ordner und arbeitet direkt in deinen Dateien. Mit einem einzigen Prompt legt sie dir danach dein erstes Projekt mit dem Blueprint an.
 
 Der Haken: Die Session läuft auf deinem Laptop. Klappst du ihn zu oder beendest VS Code, stoppt sie. Das löst Folge 3.
@@ -90,6 +96,12 @@ Prüf das Projekt, das du mir gerade eingerichtet hast. Ich bin kein Entwickler,
 ## English
 
 [Overview](README.md) · Back: [Episode 1](01-installation.md) · Next: [Episode 3](03-server-optional.md)
+
+**In this episode (≈ 30 min):**
+
+- VS Code with the Claude Code extension, signed in.
+- Your first project, set up from one single prompt.
+- Hard rules for what the AI must never do in your project.
 
 If you want AI doing real work, stop chatting in a browser tab. You set it up right inside your workspace: open VS Code, install the official Claude Code extension, link it to your claude.ai account. From then on the AI sees what is in your folders and works directly in your files. One single prompt then sets up your first project with the blueprint.
 

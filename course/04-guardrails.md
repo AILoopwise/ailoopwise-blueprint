@@ -2,6 +2,12 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 3](03-server-optional.md) · Weiter: [Folge 5](05-voice-kickoff-prd.md)
 
+**In dieser Folge (≈ 40 Min.):**
+
+- Du weißt, welche Hooks wirklich blockieren und welche nur prüfen.
+- Drei Aufgabendateien, mit denen jede Session weiß, wo ihr steht.
+- Dein Projekt, gesichert in einem privaten GitHub-Repo.
+
 Sobald dein Projekt mit dem Blueprint eingerichtet ist, arbeitet die KI in festen Leitplanken. Skripte (Hooks) laufen automatisch an festen Stellen, die KI kann sie nicht überspringen. Drei Textdateien halten den Kontext klein, damit eine frische Session in Sekunden weiß, wo ihr steht. Zum Schluss sicherst du alles in einem privaten GitHub-Repo.
 
 Die Wand: Leitplanken schreiben ist die Arbeit, die keiner sieht. Bei uns waren es Monate.
@@ -112,6 +118,12 @@ Prüf mit mir die Leitplanken in diesem Projekt. Ich bin kein Entwickler, erklä
 ## English
 
 [Overview](README.md) · Back: [Episode 3](03-server-optional.md) · Next: [Episode 5](05-voice-kickoff-prd.md)
+
+**In this episode (≈ 40 min):**
+
+- You know which hooks really block and which only check.
+- Three task files that tell every session where you stand.
+- Your project, backed up in a private GitHub repo.
 
 Once your project is set up with the blueprint, the AI works inside fixed guardrails. Scripts (hooks) run automatically at fixed points; the AI cannot skip them. Three text files keep the context small, so a fresh session knows where things stand within seconds. Finally you back everything up to a private GitHub repo.
 

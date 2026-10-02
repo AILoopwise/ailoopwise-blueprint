@@ -2,6 +2,12 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 4](04-guardrails.md) · Weiter: [Folge 6](06-long-sessions.md)
 
+**In dieser Folge (≈ 45 Min.):**
+
+- Ein PRD für dein Projekt, im Sprachchat auf dem Handy entstanden.
+- Einen Projektordner, den `/new-project` aus diesem PRD eingerichtet hat.
+- Deine Funktionen als Aufgaben, jede mit prüfbarem Abnahmekriterium.
+
 Große Projekte starten nicht im Editor, sondern bei der Idee. Dafür nimmst du die normale Claude-App auf dem Handy, brainstormst die Logik im Sprachchat und lässt dir am Ende einen strukturierten Bauplan ausgeben: ein PRD (Product Requirements Document), also was gebaut wird, für wen und woran man erkennt, dass es fertig ist. Erst danach wechselst du in die Entwicklungsumgebung, springst in einen neuen Ordner und gibst Claude Code mit `/new-project` den Bauplan. Die Ordnerstruktur steht in Sekunden.
 
 Die Wand: Ein gutes PRD zu schreiben ist schwerer, als es klingt. Ein schlechtes baut die KI genauso.
@@ -88,6 +94,12 @@ Prüf mein PRD und das Projekt, das daraus entstanden ist. Ich bin kein Entwickl
 ## English
 
 [Overview](README.md) · Back: [Episode 4](04-guardrails.md) · Next: [Episode 6](06-long-sessions.md)
+
+**In this episode (≈ 45 min):**
+
+- A PRD for your project, made by voice chat on your phone.
+- A project folder that `/new-project` set up from that PRD.
+- Your features as tasks, each with a checkable acceptance criterion.
 
 Big projects don't start in the editor, they start with the idea. For that you use the normal Claude app on your phone, brainstorm the logic by voice and have it write a structured blueprint at the end: a PRD (product requirements document), meaning what gets built, for whom, and how you'll know it's done. Only then do you move into the dev environment, jump into a new folder and hand Claude Code the blueprint with `/new-project`. The folder structure is there in seconds.
 
