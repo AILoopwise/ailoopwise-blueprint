@@ -80,7 +80,7 @@ Prüf mein PRD und das Projekt, das daraus entstanden ist. Ich bin kein Entwickl
 2. Vergleiche es mit ~/ailoopwise-blueprint/course/examples/PRD-TEMPLATE.md und dem Beispiel ~/ailoopwise-blueprint/course/examples/PRD-EXAMPLE-newsletter-tool.md. Nenne fehlende Abschnitte und jede Funktion ohne prüfbares Abnahmekriterium.
 3. Erfinde keine Antworten. Was unklar ist, stellst du mir als Frage. Unter "Offene Fragen" in PRD.md trägst du es erst ein, wenn ich Ja sage.
 4. Prüf, was /new-project angelegt hat: .claude/CLAUDE.md muss die "Regeln, die die KI nie brechen darf" als feste Regeln enthalten, tasks/todo.md jede Funktion als nummerierte Aufgabe mit Abnahmekriterium, tasks/current.md einen ersten Schritt. Nenne, was nicht passt. Gibt es .claude/CLAUDE.md noch nicht, sag mir, dass Schritt 9 fehlt.
-5. Bevor du etwas außerhalb dieses Ordners änderst, erklär es mir. Führ nie git commit oder git push aus, ohne dass ich darum bitte, und zeig nie ein Passwort, einen Schlüssel oder ein Token an.
+5. Ändere nichts außerhalb dieses Ordners. Führ nie git commit oder git push aus, ohne dass ich darum bitte, und zeig nie ein Passwort, einen Schlüssel oder ein Token an.
 ```
 
 ---
@@ -167,5 +167,5 @@ Check my PRD and the project set up from it. I am not a developer, so explain ev
 2. Compare it with ~/ailoopwise-blueprint/course/examples/PRD-TEMPLATE.md and the example ~/ailoopwise-blueprint/course/examples/PRD-EXAMPLE-newsletter-tool.md. List missing sections and every feature without a checkable acceptance criterion.
 3. Do not invent answers. Ask me about anything unclear. Add it under "Open questions" in PRD.md only after I say yes.
 4. Check what /new-project set up: .claude/CLAUDE.md must hold the "Rules the AI must never break" as hard rules, tasks/todo.md every feature as a numbered task with its acceptance criterion, tasks/current.md a first step. List what does not match. If .claude/CLAUDE.md does not exist yet, tell me step 9 is missing.
-5. Explain before you change anything outside this folder. Never run git commit or git push unless I ask, and never print a password, key or token.
+5. Change nothing outside this folder. Never run git commit or git push unless I ask, and never print a password, key or token.
 ```

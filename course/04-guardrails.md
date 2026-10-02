@@ -104,7 +104,7 @@ Prüf mit mir die Leitplanken in diesem Projekt. Ich bin kein Entwickler, erklä
 2. Teste einen Wächter. Gibt es hier schon eine .env, überspring den Test und sag es mir. Sonst versuch, eine Datei .env mit dem Inhalt TEST=1 anzulegen, und nenne mir die genaue Meldung. Wurde die Datei trotzdem angelegt, sag das deutlich.
 3. Vergleiche tasks/current.md, tasks/lessons.md und tasks/todo.md mit den ausgefüllten Beispielen in ~/ailoopwise-blueprint/course/examples/. Sag mir, was bei mir fehlt, vor allem eine "Exact Next Action", mit der eine frische Session ohne Rückfragen weitermachen kann.
 4. Prüf, ob .gitignore die Zeilen .claude/settings.local.json, .mcp.json und .env enthält. Zeig mir, was fehlt, und ergänze es erst, wenn ich Ja sage.
-5. Bevor du etwas außerhalb dieses Ordners änderst, erklär es mir. Zeig nie den Inhalt von .env oder .mcp.json an. Führ nie git commit oder git push aus, ohne dass ich darum bitte, und zeig nie ein Passwort, einen Schlüssel oder ein Token an.
+5. Ändere nichts außerhalb dieses Ordners. Zeig nie den Inhalt von .env oder .mcp.json an. Führ nie git commit oder git push aus, ohne dass ich darum bitte, und zeig nie ein Passwort, einen Schlüssel oder ein Token an.
 ```
 
 ---
@@ -215,5 +215,5 @@ Check the guardrails in this project with me. I am not a developer, so explain e
 2. Test one guard. If a .env already exists here, skip the test and tell me. Otherwise try to create a file .env containing TEST=1 and tell me the exact message you got. If the file got created anyway, say so plainly.
 3. Compare tasks/current.md, tasks/lessons.md and tasks/todo.md with the filled examples in ~/ailoopwise-blueprint/course/examples/. Tell me what mine are missing, above all an "Exact Next Action" a fresh session could follow without asking me.
 4. Check that .gitignore contains the lines .claude/settings.local.json, .mcp.json and .env. Show me what is missing and add it only after I say yes.
-5. Explain before you change anything outside this folder. Never show the contents of .env or .mcp.json. Never run git commit or git push unless I ask, and never print a password, key or token.
+5. Change nothing outside this folder. Never show the contents of .env or .mcp.json. Never run git commit or git push unless I ask, and never print a password, key or token.
 ```
