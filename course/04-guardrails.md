@@ -2,6 +2,12 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 3](03-server-optional.md) · Weiter: [Folge 5](05-voice-kickoff-prd.md)
 
+**In dieser Folge (≈ 40 Min. zum Umsetzen):**
+
+- Du weißt, welche Hooks wirklich blockieren und welche nur prüfen.
+- Drei Aufgabendateien, mit denen jede Session weiß, wo ihr steht.
+- Dein Projekt, gesichert in einem privaten GitHub-Repo.
+
 Sobald dein Projekt mit dem Blueprint eingerichtet ist, arbeitet die KI in festen Leitplanken. Skripte (Hooks) laufen automatisch an festen Stellen, die KI kann sie nicht überspringen. Drei Textdateien halten den Kontext klein, damit eine frische Session in Sekunden weiß, wo ihr steht. Zum Schluss sicherst du alles in einem privaten GitHub-Repo.
 
 Die Wand: Leitplanken schreiben ist die Arbeit, die keiner sieht. Bei uns waren es Monate.
@@ -15,7 +21,8 @@ Die Wand: Leitplanken schreiben ist die Arbeit, die keiner sieht. Bei uns waren 
 
 ## Was du brauchst
 
-- Dein Projekt aus [Folge 2](02-desktop-setup.md) (mit `.claude/hooks/` und `.claude/settings.json`)
+- Dein Projekt aus [Folge 2](02-desktop-setup.md) (mit `.claude/hooks/` und `.claude/settings.json`, oder mit den globalen Hooks in `~/.claude/`)
+- Claude im Modus **Manual**, wie in [Folge 2](02-desktop-setup.md), Schritt 5
 - **jq**: Ohne jq blockieren die Schutz-Hooks Änderungen und Schreibzugriffe, bis es installiert ist (der Befehls-Wächter funktioniert trotzdem): https://jqlang.org/download/
 - **Git:** https://git-scm.com/downloads · **ein GitHub-Konto:** https://github.com
 - Zum Nachlesen: Hooks-Referenz https://code.claude.com/docs/de/hooks
@@ -39,7 +46,7 @@ Die Skripte liegen in `blueprint/hooks/`, eingetragen in `.claude/settings.json`
 
 ## Schritt für Schritt
 
-1. Öffne dein Projekt und tippe `/hooks`. Du siehst die Einträge unter PreToolUse, PostToolUse, Stop und SessionStart mit der Quelle **Project Settings**.
+1. Öffne dein Projekt. In VS Code klickst du im Eingabefeld auf `/` und wählst unter Customize **Hooks** (ab Claude Code v2.1.269), im Terminal tippst du `/hooks`. Du siehst die Einträge unter PreToolUse, PostToolUse, Stop und SessionStart. Als Herkunft steht dort **project settings**, oder **user settings**, wenn die Hooks global installiert sind. Quellen: https://code.claude.com/docs/de/vs-code · https://code.claude.com/docs/de/hooks
 2. Löse einen Wächter absichtlich aus:
    ```text
    Lege im Projektordner eine Datei .env mit dem Inhalt TEST=1 an.
@@ -55,7 +62,7 @@ Die Skripte liegen in `blueprint/hooks/`, eingetragen in `.claude/settings.json`
    Welche Prüfungen (Typecheck, Lint, Tests, Build) hast du gerade ausgeführt? Nenne Befehl und Ergebnis. Was nicht lief, sag ausdrücklich.
    ```
 5. Leg auf https://github.com/new ein **privates** Repo an, ohne README, Lizenz oder `.gitignore`.
-6. Leg im Projekt eine `.gitignore` an. Die ersten drei Zeilen stammen aus `/new-project`, `.env` kommt dazu:
+6. Leg im Projekt eine `.gitignore` an, oder ergänze sie, wenn es schon eine gibt. `/new-project` trägt die ersten drei Zeilen nur in eine bereits vorhandene Datei ein, `.env` kommt dazu:
    ```text
    .claude/settings.local.json
    .mcp.json
@@ -63,7 +70,12 @@ Die Skripte liegen in `blueprint/hooks/`, eingetragen in `.claude/settings.json`
    .env
    ```
    Willst du deinen Arbeitsstand mit sichern, streich die Zeile `tasks/current.md`. `.mcp.json` und `.env` bleiben draußen, dort stehen Tokens.
-7. Im Terminal des Projekts (in VS Code: `` Ctrl+` ``):
+7. Öffne das Terminal des Projekts (in VS Code: Menü **Terminal → Neues Terminal**, oder `` Ctrl+` ``, auch am Mac mit Control). Einmal pro Rechner gibst du Git deinen Namen und deine E-Mail, Git schreibt beides in jede Speicherung ([Quelle](https://git-scm.com/book/de/v2/Erste-Schritte-Git-Basis-Konfiguration)):
+   ```bash
+   git config --global user.name "Dein Name"
+   git config --global user.email "du@example.com"
+   ```
+   Dann:
    ```bash
    git init -b main
    git add .
@@ -89,16 +101,35 @@ verifyToken from src/lib/tokens.ts; on success set the subscriber's status to "u
 
 ## Wenn etwas hakt
 
-- **Die `.env` wurde angelegt, oder du siehst `Failed with non-blocking status code`:** Ein Hook konnte nicht starten, und dann läuft die Aktion einfach weiter. Prüfe, ob die Hooks in `~/.claude/hooks/` (oder `.claude/hooks/` im Projekt) liegen und in `~/.claude/settings.json` eingetragen sind; führe sonst `bootstrap.sh` erneut aus. Fehlt jq, siehst du stattdessen die Meldung „safety hooks need jq“, und die Änderung wird blockiert. Quelle: https://code.claude.com/docs/de/hooks#other-exit-codes
+- **Die `.env` wurde angelegt, oder du siehst `Failed with non-blocking status code`:** Ein Hook konnte nicht starten, und dann läuft die Aktion einfach weiter. Prüfe, ob die Hooks in `~/.claude/hooks/` liegen und in `~/.claude/settings.json` eingetragen sind (oder im Projekt in `.claude/hooks/` und `.claude/settings.json`). Globale Hooks reparierst du mit `bootstrap.sh`, Hooks nur im Projekt mit `bash ~/ailoopwise-blueprint/blueprint/scripts/blueprint-sync.sh --project <dein-projektordner>`. Fehlt jq, siehst du stattdessen die Meldung „safety hooks need jq“, und die Änderung wird blockiert. Quelle: https://code.claude.com/docs/de/hooks#other-exit-codes
 - **Claude sagt „Tests grün“, du hast keinen Lauf gesehen:** Nur Typ- und Testfehler blockieren; Lint- und Format-Warnungen von `quality-check.sh` stehen nur im Debug-Log. Starte mit `claude --debug` und lies `~/.claude/debug/<session-id>.txt`, oder lass Claude `npm test` sichtbar ausführen. Quelle: https://code.claude.com/docs/de/hooks#debug-hooks
-- **`git push` fragt nach einem Passwort und scheitert:** GitHub nimmt keine Passwörter mehr. Gib ein Personal Access Token ein oder nutze den Git Credential Manager. Quelle: https://docs.github.com/de/get-started/git-basics/about-remote-repositories
+- **`git push` fragt nach einem Passwort und scheitert:** GitHub nimmt keine Passwörter mehr. GitHub empfiehlt GitHub CLI oder den Git Credential Manager, beide merken sich deine Anmeldung; ein Personal Access Token geht auch. Quellen: https://docs.github.com/de/get-started/git-basics/caching-your-github-credentials-in-git · https://docs.github.com/de/get-started/git-basics/about-remote-repositories
 - **`git push` wird abgelehnt (rejected):** Das Repo wurde auf GitHub mit README oder Lizenz angelegt. Leg es leer an. Quelle: https://docs.github.com/de/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github
+
+## Sag deiner KI
+
+Füge das in Claude Code in deinem Projektordner ein. Claude prüft die Leitplanken mit dir.
+
+```text
+Prüf mit mir die Leitplanken in diesem Projekt. Ich bin kein Entwickler, erkläre alles in einfachen Worten.
+1. Lies .claude/settings.json (stehen dort keine Hooks, auch ~/.claude/settings.json) und sag mir, welche Hooks eingetragen sind und welche davon wirklich blockieren. Die Tabelle dazu steht in ~/ailoopwise-blueprint/course/04-guardrails.md.
+2. Teste einen Wächter. Gibt es hier schon eine .env, überspring den Test und sag es mir. Sonst versuch, eine Datei .env mit dem Inhalt TEST=1 anzulegen, und nenne mir die genaue Meldung. Wurde die Datei trotzdem angelegt, sag das deutlich.
+3. Vergleiche tasks/current.md, tasks/lessons.md und tasks/todo.md mit den ausgefüllten Beispielen in ~/ailoopwise-blueprint/course/examples/. Sag mir, was bei mir fehlt, vor allem eine "Exact Next Action", mit der eine frische Session ohne Rückfragen weitermachen kann.
+4. Prüf, ob .gitignore die Zeilen .claude/settings.local.json, .mcp.json und .env enthält. Zeig mir, was fehlt, und ergänze es erst, wenn ich Ja sage.
+5. Ändere nichts außerhalb dieses Ordners. Zeig nie den Inhalt von .env oder .mcp.json an. Führ nie git commit oder git push aus, ohne dass ich darum bitte, und zeig nie ein Passwort, einen Schlüssel oder ein Token an.
+```
 
 ---
 
 ## English
 
 [Overview](README.md) · Back: [Episode 3](03-server-optional.md) · Next: [Episode 5](05-voice-kickoff-prd.md)
+
+**In this episode (≈ 40 min of hands-on work):**
+
+- You know which hooks really block and which only check.
+- Three task files that tell every session where you stand.
+- Your project, backed up in a private GitHub repo.
 
 Once your project is set up with the blueprint, the AI works inside fixed guardrails. Scripts (hooks) run automatically at fixed points; the AI cannot skip them. Three text files keep the context small, so a fresh session knows where things stand within seconds. Finally you back everything up to a private GitHub repo.
 
@@ -113,7 +144,8 @@ The wall: writing the guardrails is the work nobody sees. For us it took months.
 
 ### What you need
 
-- Your project from [episode 2](02-desktop-setup.md) (with `.claude/hooks/` and `.claude/settings.json`)
+- Your project from [episode 2](02-desktop-setup.md) (with `.claude/hooks/` and `.claude/settings.json`, or with the global hooks in `~/.claude/`)
+- Claude in **Manual** mode, as in [episode 2](02-desktop-setup.md), step 5
 - **jq**: without it, the safety hooks block edits and writes until it is installed (the command guard still works): https://jqlang.org/download/
 - **Git:** https://git-scm.com/downloads · **a GitHub account:** https://github.com
 - For reference: hooks reference https://code.claude.com/docs/en/hooks
@@ -137,7 +169,7 @@ The scripts live in `blueprint/hooks/`, registered in `.claude/settings.json`:
 
 ### Step by step
 
-1. Open your project and type `/hooks`. You see the entries under PreToolUse, PostToolUse, Stop and SessionStart with the source **Project Settings**.
+1. Open your project. In VS Code, click `/` in the prompt box and pick **Hooks** under Customize (Claude Code v2.1.269 or later); in the terminal, type `/hooks`. You see the entries under PreToolUse, PostToolUse, Stop and SessionStart. Their source reads **project settings**, or **user settings** if the hooks are installed globally. Sources: https://code.claude.com/docs/en/vs-code · https://code.claude.com/docs/en/hooks
 2. Trigger a guard on purpose:
    ```text
    Create a file .env in the project folder containing TEST=1.
@@ -153,7 +185,7 @@ The scripts live in `blueprint/hooks/`, registered in `.claude/settings.json`:
    Which checks (typecheck, lint, tests, build) did you just run? Give the command and the result. Say explicitly what did not run.
    ```
 5. Create a **private** repo at https://github.com/new, without README, licence or `.gitignore`.
-6. Add a `.gitignore` to the project. The first three lines come from `/new-project`; `.env` is added:
+6. Create a `.gitignore` in the project, or extend it if one exists. `/new-project` only adds the first three lines to a file that already exists; `.env` is added:
    ```text
    .claude/settings.local.json
    .mcp.json
@@ -161,7 +193,12 @@ The scripts live in `blueprint/hooks/`, registered in `.claude/settings.json`:
    .env
    ```
    To back up your working state too, remove the `tasks/current.md` line. `.mcp.json` and `.env` stay out; tokens live there.
-7. In the project terminal (`` Ctrl+` `` in VS Code):
+7. Open the project terminal (in VS Code: menu **Terminal → New Terminal**, or `` Ctrl+` ``, on a Mac with Control too). Once per computer, give Git your name and email; Git writes both into every commit ([source](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)):
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "you@example.com"
+   ```
+   Then:
    ```bash
    git init -b main
    git add .
@@ -187,7 +224,20 @@ Open your repo on github.com and check: it is private, and `.mcp.json` and `.env
 
 ### If something goes wrong
 
-- **The `.env` got created, or you see `Failed with non-blocking status code`:** a hook couldn't start, and then the action simply goes ahead. Check that the hooks are in `~/.claude/hooks/` (or `.claude/hooks/` in the project) and listed in `~/.claude/settings.json`; otherwise run `bootstrap.sh` again. If jq is missing you see "safety hooks need jq" instead, and the edit is blocked. Source: https://code.claude.com/docs/en/hooks#other-exit-codes
+- **The `.env` got created, or you see `Failed with non-blocking status code`:** a hook couldn't start, and then the action simply goes ahead. Check that the hooks are in `~/.claude/hooks/` and listed in `~/.claude/settings.json` (or, in the project, in `.claude/hooks/` and `.claude/settings.json`). Repair global hooks with `bootstrap.sh`, project-only hooks with `bash ~/ailoopwise-blueprint/blueprint/scripts/blueprint-sync.sh --project <your-project-folder>`. If jq is missing you see "safety hooks need jq" instead, and the edit is blocked. Source: https://code.claude.com/docs/en/hooks#other-exit-codes
 - **Claude says "tests pass" but you saw no run:** only type and test failures block; the lint and format warnings from `quality-check.sh` go to the debug log only. Start with `claude --debug` and read `~/.claude/debug/<session-id>.txt`, or have Claude run `npm test` visibly. Source: https://code.claude.com/docs/en/hooks#debug-hooks
-- **`git push` asks for a password and fails:** GitHub no longer accepts passwords. Enter a personal access token or use Git Credential Manager. Source: https://docs.github.com/en/get-started/git-basics/about-remote-repositories
+- **`git push` asks for a password and fails:** GitHub no longer accepts passwords. GitHub recommends GitHub CLI or Git Credential Manager; both remember your sign-in. A personal access token works too. Sources: https://docs.github.com/en/get-started/git-basics/caching-your-github-credentials-in-git · https://docs.github.com/en/get-started/git-basics/about-remote-repositories
 - **`git push` is rejected:** the repo was created on GitHub with a README or licence. Create it empty. Source: https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github
+
+### Tell your AI
+
+Paste this into Claude Code in your project folder. Claude checks the guardrails with you.
+
+```text
+Check the guardrails in this project with me. I am not a developer, so explain everything in plain words.
+1. Read .claude/settings.json (if it lists no hooks, also ~/.claude/settings.json) and tell me which hooks are registered and which of them really block. The table is in ~/ailoopwise-blueprint/course/04-guardrails.md.
+2. Test one guard. If a .env already exists here, skip the test and tell me. Otherwise try to create a file .env containing TEST=1 and tell me the exact message you got. If the file got created anyway, say so plainly.
+3. Compare tasks/current.md, tasks/lessons.md and tasks/todo.md with the filled examples in ~/ailoopwise-blueprint/course/examples/. Tell me what mine are missing, above all an "Exact Next Action" a fresh session could follow without asking me.
+4. Check that .gitignore contains the lines .claude/settings.local.json, .mcp.json and .env. Show me what is missing and add it only after I say yes.
+5. Change nothing outside this folder. Never show the contents of .env or .mcp.json. Never run git commit or git push unless I ask, and never print a password, key or token.
+```

@@ -25,7 +25,7 @@ Zum Abhaken, in dieser Reihenfolge. Die Befehle und Begründungen stehen in `../
 
 **Mobil arbeiten**
 - [ ] Termius: eigener Schlüssel erzeugt und auf den Server exportiert, Host mit Tailscale-Adresse angelegt
-- [ ] `tmux new -As claude` auf dem Server, darin `claude` im Projektordner, Vertrauensdialog bestätigt
+- [ ] `tmux new -As claude` auf dem Server, darin `claude --permission-mode manual` im Projektordner, Vertrauensdialog bestätigt
 - [ ] `/remote-control` aktiv, Sitzung in der Claude-App unter **Code** sichtbar
 - [ ] Getrennt mit `Ctrl+b` dann `d`, später mit `tmux attach -t claude` zurück
 
@@ -61,7 +61,7 @@ To tick off, in this order. Commands and reasons are in `../03-server-optional.m
 
 **Working from the phone**
 - [ ] Termius: own key generated and exported to the server, host added with the Tailscale address
-- [ ] `tmux new -As claude` on the server, `claude` running inside it in the project folder, trust dialog accepted
+- [ ] `tmux new -As claude` on the server, `claude --permission-mode manual` running inside it in the project folder, trust dialog accepted
 - [ ] `/remote-control` on, session visible in the Claude app under **Code**
 - [ ] Detached with `Ctrl+b` then `d`, back later with `tmux attach -t claude`
 
