@@ -2,6 +2,12 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 2](02-desktop-setup.md) · Weiter: [Folge 4](04-guardrails.md)
 
+**In dieser Folge (≈ 90 Min. zum Umsetzen):**
+
+- Einen eigenen Server, nur über dein privates Tailscale-Netz erreichbar.
+- Claude Code in einem abgeschotteten Container, ohne offene Ports.
+- Eine Session, die weiterläuft, gesteuert von deinem Handy.
+
 **Diese Folge ist ein Extra.** Ist sie dir zu technisch, überspring sie. Die Folgen 4 bis 6 brauchen keinen Server.
 
 Du mietest einen kleinen virtuellen Server (Hetzner oder Hostinger) und lässt Claude Code dort in einem abgeschotteten Docker-Container laufen. Tailscale macht den Server von außen unsichtbar. Auf dem Handy öffnest du Termius, hängst dich an eine tmux-Session, damit nichts abreißt, und mit `/remote-control` steuerst du die Session auch aus der Claude-App. Der Laptop kann zu bleiben.
@@ -17,7 +23,7 @@ Die Wand: Ein Server heißt auch Updates, Backups und Zugriffsrechte, dauerhaft,
 ## Was du brauchst
 
 - **Einen VPS** mit Ubuntu und mindestens 4 GB RAM (Mindestanforderung von Claude Code): Hetzner Cloud https://www.hetzner.com/cloud oder Hostinger VPS https://www.hostinger.com/vps-hosting
-- **Tailscale** auf Laptop und Handy: https://tailscale.com/download · auf dem Server: https://tailscale.com/kb/1031/install-linux
+- **Tailscale** auf Laptop und Handy: https://tailscale.com/download · auf dem Server: https://tailscale.com/kb/1031/install-linux · Der Gratis-Plan „Personal“ ist laut Tailscale nur für nicht-kommerzielle Nutzung. Für dein Geschäft brauchst du einen bezahlten Plan: https://tailscale.com/pricing
 - **Termius** auf dem Handy: https://termius.com
 - **Docker Engine** für Ubuntu: https://docs.docker.com/engine/install/ubuntu/
 - **tmux**: https://github.com/tmux/tmux/wiki/Getting-Started
@@ -71,7 +77,7 @@ Die Wand: Ein Server heißt auch Updates, Backups und Zugriffsrechte, dauerhaft,
    ```
    Installiere Claude Code im Container mit dem Linux-Befehl von https://code.claude.com/docs/de/setup und prüfe mit `claude --version`.
 10. **Anmelden:** `claude` starten. Auf dem Server öffnet sich kein Browser: Drücke `c`, öffne die kopierte URL auf Laptop oder Handy, melde dich an und füge den angezeigten Code bei `Paste code here if prompted` ein.
-11. **Projekt einrichten wie in Folge 2**, nur im Terminal: `cd ~/ailoopwise-blueprint`, `claude`, den Prompt aus [Folge 2](02-desktop-setup.md) einfügen. Danach `cd ~/<dein-projekt>` und `claude`. Den Vertrauensdialog bestätigst du einmal.
+11. **Projekt einrichten wie in Folge 2**, nur im Terminal: `cd ~/ailoopwise-blueprint`, `claude --permission-mode manual`, den Prompt aus [Folge 2](02-desktop-setup.md) einfügen. Danach `cd ~/<dein-projekt>` und `claude --permission-mode manual`. Den Vertrauensdialog bestätigst du einmal. Ohne den Zusatz startet Claude ab v2.1.283 im Modus Auto und fragt bei den meisten Aktionen nicht mehr nach ([Quelle](https://code.claude.com/docs/de/permission-modes)).
 12. **Termius auf dem Handy:** **Keychain → Generate Key** (Ed25519), Host anlegen mit `100.x.y.z`, Nutzer `root`, diesem Schlüssel. Dann den Schlüssel per **Export to host** auf den Server bringen ([Anleitung](https://docs.termius.com/keychain/ssh-keys-and-certificates)). Verbinden und:
     ```bash
     tmux attach -t claude
@@ -106,11 +112,31 @@ Klapp den Laptop zu, verbinde dich per Termius, tippe `tmux attach -t claude` un
 - **Nach einiger Zeit kommst du über Tailscale nicht mehr rein:** Tailscale verlangt regelmäßig eine neue Anmeldung. Für diesen Server in der Admin-Konsole unter **Machines** „Disable Key Expiry“ wählen. Quelle: https://tailscale.com/kb/1028/key-expiry
 - **Die Sitzung ist in der App offline, sobald du Termius schließt:** Claude lief nicht in tmux. `tmux new -As claude` starten, darin Claude neu starten. Quelle: https://code.claude.com/docs/de/remote-control#limitations
 
+## Sag deiner KI
+
+Füge das vor dem Bestellen in Claude Code auf deinem Laptop ein. Claude geht die Checkliste mit dir durch und hält überall an, wo Geld oder deine Konten im Spiel sind.
+
+```text
+Geh mit mir ~/ailoopwise-blueprint/course/examples/server-checklist.md durch, Punkt für Punkt und in dieser Reihenfolge. Ich bin kein Entwickler, erkläre jeden Punkt in einem einfachen Satz.
+1. Zeig mir zu jedem Punkt den passenden Befehl oder Klickweg aus ~/ailoopwise-blueprint/course/03-server-optional.md und warte, bis ich dir das Ergebnis sage, bevor du weitermachst.
+2. HALT vor allem, was Geld kostet oder in einem meiner Konten passiert (Server bestellen, Hetzner, Hostinger, Tailscale, GitHub). Sag mir, was ich dort selbst tun muss, und warte, bis ich sage, dass es erledigt ist.
+3. Lass mich ufw erst einschalten, wenn der Login über die Tailscale-Adresse (100.x.y.z) klappt, sonst sperre ich mich aus.
+4. Ändere selbst nichts, weder in diesem Ordner noch außerhalb. Befehle, die nur etwas anzeigen, darfst du auf diesem Rechner ausführen, nachdem du sie erklärt hast. Alles andere tippe ich selbst.
+5. Öffne oder zeig nie den privaten Schlüssel ~/.ssh/id_ed25519 (weitergegeben wird nur die .pub-Datei), und zeig nie Passwörter, Tokens oder Login-Codes an.
+6. Führ nie git commit oder git push aus, ohne dass ich darum bitte. Nenne mir zum Schluss die Punkte, die noch offen sind.
+```
+
 ---
 
 ## English
 
 [Overview](README.md) · Back: [Episode 2](02-desktop-setup.md) · Next: [Episode 4](04-guardrails.md)
+
+**In this episode (≈ 90 min of hands-on work):**
+
+- Your own server, reachable only through your private Tailscale network.
+- Claude Code in a sealed-off container with no open ports.
+- A session that keeps running while you steer it by phone.
 
 **This episode is an extra.** If it feels too technical, skip it. Episodes 4 to 6 don't need a server.
 
@@ -127,7 +153,7 @@ The wall: a server also means updates, backups and access rights, forever, not o
 ### What you need
 
 - **A VPS** with Ubuntu and at least 4 GB RAM (the Claude Code minimum): Hetzner Cloud https://www.hetzner.com/cloud or Hostinger VPS https://www.hostinger.com/vps-hosting
-- **Tailscale** on laptop and phone: https://tailscale.com/download · on the server: https://tailscale.com/kb/1031/install-linux
+- **Tailscale** on laptop and phone: https://tailscale.com/download · on the server: https://tailscale.com/kb/1031/install-linux · Tailscale says its free Personal plan is only for non-commercial use. For your business you need a paid plan: https://tailscale.com/pricing
 - **Termius** on your phone: https://termius.com
 - **Docker Engine** for Ubuntu: https://docs.docker.com/engine/install/ubuntu/
 - **tmux**: https://github.com/tmux/tmux/wiki/Getting-Started
@@ -181,7 +207,7 @@ The wall: a server also means updates, backups and access rights, forever, not o
    ```
    Install Claude Code inside the container with the Linux command from https://code.claude.com/docs/en/setup and check with `claude --version`.
 10. **Sign in:** start `claude`. No browser opens on a server: press `c`, open the copied URL on laptop or phone, sign in, and paste the code shown at `Paste code here if prompted`.
-11. **Set up the project as in episode 2**, just in the terminal: `cd ~/ailoopwise-blueprint`, `claude`, paste the prompt from [episode 2](02-desktop-setup.md). Then `cd ~/<your-project>` and `claude`. Accept the trust dialog once.
+11. **Set up the project as in episode 2**, just in the terminal: `cd ~/ailoopwise-blueprint`, `claude --permission-mode manual`, paste the prompt from [episode 2](02-desktop-setup.md). Then `cd ~/<your-project>` and `claude --permission-mode manual`. Accept the trust dialog once. Without the flag, Claude starts in Auto mode from v2.1.283 and no longer asks before most actions ([source](https://code.claude.com/docs/en/permission-modes)).
 12. **Termius on the phone:** **Keychain → Generate Key** (Ed25519), add a host with `100.x.y.z`, user `root`, that key. Then push the key to the server with **Export to host** ([guide](https://docs.termius.com/keychain/ssh-keys-and-certificates)). Connect and run:
     ```bash
     tmux attach -t claude
@@ -215,3 +241,17 @@ Shut the laptop, connect with Termius, type `tmux attach -t claude` and check th
 - **Login code not accepted:** the browser ran on another device. Copy the URL with `c`, sign in, paste the code in the terminal. If pasting fails, use `claude auth login`. Source: https://code.claude.com/docs/en/troubleshoot-install#oauth-login-fails-in-wsl2-ssh-or-containers
 - **After a while you can't get in over Tailscale:** Tailscale requires periodic re-authentication. For this server choose "Disable Key Expiry" under **Machines** in the admin console. Source: https://tailscale.com/kb/1028/key-expiry
 - **The session goes offline in the app as soon as you close Termius:** Claude wasn't running inside tmux. Start `tmux new -As claude` and restart Claude inside it. Source: https://code.claude.com/docs/en/remote-control#limitations
+
+### Tell your AI
+
+Paste this into Claude Code on your laptop before you order anything. Claude walks you through the checklist and stops wherever money or your accounts are involved.
+
+```text
+Walk me through ~/ailoopwise-blueprint/course/examples/server-checklist.md, one item at a time and in its order. I am not a developer, so explain each item in one plain sentence.
+1. For each item, show me the matching command or click path from ~/ailoopwise-blueprint/course/03-server-optional.md, then wait until I tell you the result before you go on.
+2. STOP before anything that costs money or happens in one of my accounts (ordering the server, Hetzner, Hostinger, Tailscale, GitHub). Tell me what to do there myself and wait until I say it is done.
+3. Do not let me switch on ufw before login over the Tailscale address (100.x.y.z) works, or I lock myself out.
+4. Change nothing yourself, in this folder or outside it. You may run commands that only display something on this computer, after explaining them. I type everything else myself.
+5. Never open or print the private key ~/.ssh/id_ed25519 (only the .pub file is shared), and never print passwords, tokens or login codes.
+6. Never run git commit or git push unless I ask. At the end, list the items that are still open.
+```

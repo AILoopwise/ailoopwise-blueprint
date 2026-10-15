@@ -14,6 +14,7 @@
 - Typecheck: [command]
 - Format check: [command]
 - Build: [command]
+- All checks in one: [command, e.g. `pnpm run check`]
 
 ## Layout
 - `[folder]/` — [what lives there]
@@ -29,6 +30,7 @@
 
 ## Mandatory Quality Checks
 Before calling a task done, run typecheck, lint, tests, format check and build (the commands above) and report each result.
+A missing command is a gap to fix before feature work, not a step to skip.
 New features get a happy-path test and one edge case; bug fixes get a regression test.
 
 ## Working state

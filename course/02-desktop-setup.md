@@ -2,6 +2,12 @@
 
 **Deutsch** · [English](#english) · [Übersicht](README.md) · Zurück: [Folge 1](01-installation.md) · Weiter: [Folge 3](03-server-optional.md)
 
+**In dieser Folge (≈ 30 Min. zum Umsetzen):**
+
+- VS Code mit der Claude-Code-Erweiterung, angemeldet.
+- Dein erstes Projekt, eingerichtet mit einem einzigen Prompt.
+- Feste Regeln, was die KI in deinem Projekt nie tun darf.
+
 Wer KI wirklich für sich arbeiten lassen will, chattet nicht mehr im Browser. Du richtest sie direkt in deiner Arbeitsumgebung ein: VS Code öffnen, die offizielle Claude-Code-Erweiterung installieren, mit deinem claude.ai-Konto verbinden. Ab dann sieht die KI den Inhalt deiner Ordner und arbeitet direkt in deinen Dateien. Mit einem einzigen Prompt legt sie dir danach dein erstes Projekt mit dem Blueprint an.
 
 Der Haken: Die Session läuft auf deinem Laptop. Klappst du ihn zu oder beendest VS Code, stoppt sie. Das löst Folge 3.
@@ -15,6 +21,7 @@ Der Haken: Die Session läuft auf deinem Laptop. Klappst du ihn zu oder beendest
 ## Was du brauchst
 
 - Claude Code aus [Folge 1](01-installation.md) und den Ordner `~/ailoopwise-blueprint`
+- **jq** aus [Folge 1](01-installation.md): Dein neues Projekt bekommt die Schutz-Hooks, und ohne jq blockieren sie Änderungen. Prüfen mit `jq --version`: https://jqlang.org/download/
 - **VS Code 1.94.0 oder neuer:** https://code.visualstudio.com
 - **Die Claude-Code-Erweiterung**, Anleitung: https://code.claude.com/docs/de/vs-code
 - Dein Claude-Konto (Pro, Max, Team, Enterprise oder Console). Ein API-Schlüssel ist nicht nötig.
@@ -25,7 +32,7 @@ Der Haken: Die Session läuft auf deinem Laptop. Klappst du ihn zu oder beendest
 2. Öffne die Erweiterungen mit `Cmd+Shift+X` (Mac) oder `Ctrl+Shift+X` (Windows/Linux), suche **Claude Code** und klicke **Install**.
 3. **Datei → Ordner öffnen…** und wähle `~/ailoopwise-blueprint`. Fragt VS Code, ob du dem Ordner vertraust, antworte mit Ja.
 4. Öffne eine beliebige Datei, zum Beispiel `README.md`. Klicke oben rechts im Editor auf das Spark-Symbol. Das Claude-Panel öffnet sich.
-5. Klicke **Sign in** und bestätige im Browser.
+5. Klicke **Sign in** und bestätige im Browser. Klicke dann unten im Eingabefeld auf die Modusanzeige und wähle **Manual**. Ab Claude Code v2.1.283 startet die Erweiterung im Modus **Auto**: Dort prüft ein Prüfprogramm die meisten Aktionen, statt dich zu fragen. Deine Wahl gilt auch für die nächsten Gespräche. Quelle: https://code.claude.com/docs/de/permission-modes
 6. Kopiere diesen Prompt vollständig ins Claude-Panel und drücke Enter. Es ist derselbe Prompt wie in der `README.de.md` des Blueprints:
    ```text
    Du richtest mir den AILoopwise Blueprint ein. Ich bin kein Entwickler, erkläre alles in einfachen Worten.
@@ -42,7 +49,7 @@ Der Haken: Die Session läuft auf deinem Laptop. Klappst du ihn zu oder beendest
    7. Ändere nichts in diesem Blueprint-Ordner. Zeig mir zum Schluss, welche Dateien du angelegt hast, und sag mir, wie ich das neue Projekt in VS Code öffne.
    ```
 7. Beantworte die drei Fragen. Bei Frage c) sei konkret: „Nie an echte Kunden mailen“ wirkt, „vorsichtig sein“ nicht.
-8. Claude fragt vor dem Anlegen von Dateien und vor Befehlen um Erlaubnis. Lies kurz, was es tun will, und erlaube es.
+8. Im Modus **Manual** fragt Claude vor dem Ändern von Dateien und vor den meisten Befehlen um Erlaubnis. Lies kurz, was es tun will, und erlaube es.
 9. Öffne den neuen Projektordner mit **Datei → Ordner öffnen…** und starte dort eine neue Claude-Session. Prüfe:
    ```text
    Lies .claude/CLAUDE.md und nenne mir die festen Regeln in höchstens drei Zeilen.
@@ -72,11 +79,30 @@ Die Vorlagen des Blueprints sind englisch. Du kannst deine Regeln trotzdem auf D
 - **`claude` im VS-Code-Terminal wird nicht gefunden:** Die Erweiterung bringt eine eigene Kopie mit, legt `claude` aber nicht in deinen Suchpfad. Für das Terminal brauchst du die Installation aus Folge 1.
 - **Claude findet den Blueprint-Ordner nicht:** Sag es ihm direkt: `My blueprint folder is at ~/ailoopwise-blueprint/blueprint/` (aus `Install-guide.md`, Troubleshooting).
 
+## Sag deiner KI
+
+Starte im neuen Projektordner eine neue Session und füge das ein. Claude prüft, was Folge 2 angelegt hat, und ändert nichts ohne dein Ja.
+
+```text
+Prüf das Projekt, das du mir gerade eingerichtet hast. Ich bin kein Entwickler, erkläre alles in einfachen Worten.
+1. Prüf, ob dieser Ordner .claude/CLAUDE.md, tasks/current.md, tasks/lessons.md und tasks/todo.md enthält. Nenne, was fehlt.
+2. Nenne die festen Regeln aus .claude/CLAUDE.md in höchstens drei Zeilen.
+3. Vergleiche meine CLAUDE.md mit ~/ailoopwise-blueprint/course/examples/CLAUDE-example.md. Sag mir, welche Abschnitte bei mir fehlen und welche meiner Regeln zu vage sind ("vorsichtig sein" ist vage, "nie an echte Kunden mailen" nicht).
+4. Schlag bessere Formulierungen vor, aber ändere erst etwas, wenn ich Ja sage, und nur in diesem Projektordner.
+5. Ändere nichts in ~/ailoopwise-blueprint. Führ nie git commit oder git push aus, ohne dass ich darum bitte, und zeig nie ein Passwort, einen Schlüssel oder ein Token an.
+```
+
 ---
 
 ## English
 
 [Overview](README.md) · Back: [Episode 1](01-installation.md) · Next: [Episode 3](03-server-optional.md)
+
+**In this episode (≈ 30 min of hands-on work):**
+
+- VS Code with the Claude Code extension, signed in.
+- Your first project, set up from one single prompt.
+- Hard rules for what the AI must never do in your project.
 
 If you want AI doing real work, stop chatting in a browser tab. You set it up right inside your workspace: open VS Code, install the official Claude Code extension, link it to your claude.ai account. From then on the AI sees what is in your folders and works directly in your files. One single prompt then sets up your first project with the blueprint.
 
@@ -91,6 +117,7 @@ The catch: the session runs on your laptop. Close the lid or quit VS Code and it
 ### What you need
 
 - Claude Code from [episode 1](01-installation.md) and the folder `~/ailoopwise-blueprint`
+- **jq** from [episode 1](01-installation.md): your new project gets the safety hooks, and without jq they block edits. Check with `jq --version`: https://jqlang.org/download/
 - **VS Code 1.94.0 or later:** https://code.visualstudio.com
 - **The Claude Code extension**, guide: https://code.claude.com/docs/en/vs-code
 - Your Claude account (Pro, Max, Team, Enterprise or Console). No API key needed.
@@ -101,7 +128,7 @@ The catch: the session runs on your laptop. Close the lid or quit VS Code and it
 2. Open Extensions with `Cmd+Shift+X` (Mac) or `Ctrl+Shift+X` (Windows/Linux), search **Claude Code** and click **Install**.
 3. **File → Open Folder…** and pick `~/ailoopwise-blueprint`. When VS Code asks whether you trust the folder, say yes.
 4. Open any file, for example `README.md`. Click the Spark icon at the top right of the editor. The Claude panel opens.
-5. Click **Sign in** and confirm in your browser.
+5. Click **Sign in** and confirm in your browser. Then click the mode indicator at the bottom of the prompt box and pick **Manual**. From Claude Code v2.1.283 the extension starts in **Auto** mode, where a classifier reviews most actions instead of asking you. Your pick carries over to the next conversations. Source: https://code.claude.com/docs/en/permission-modes
 6. Copy this prompt in full into the Claude panel and press Enter. It is the same prompt as in the blueprint's `README.md`:
    ```text
    Set up the AILoopwise Blueprint for me. I am not a developer, so explain everything in plain words.
@@ -118,7 +145,7 @@ The catch: the session runs on your laptop. Close the lid or quit VS Code and it
    7. Do not change anything in this blueprint folder. At the end, show me which files you created and tell me how to open the new project in VS Code.
    ```
 7. Answer the three questions. For question c) be concrete: "never email real customers" works, "be careful" does not.
-8. Claude asks for permission before it creates files or runs commands. Read what it wants to do, then allow it.
+8. In **Manual** mode Claude asks for permission before it edits files and before most commands. Read what it wants to do, then allow it.
 9. Open the new project folder with **File → Open Folder…** and start a new Claude session there. Check:
    ```text
    Read .claude/CLAUDE.md and list its hard rules in three lines at most.
@@ -145,3 +172,16 @@ Open your new project's `.claude/CLAUDE.md` and read your hard rules yourself on
 - **The extension won't install:** check your VS Code version and install straight from the Marketplace: https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code
 - **`claude` not found in the VS Code terminal:** the extension ships its own copy but does not put `claude` on your path. For the terminal you need the install from episode 1.
 - **Claude can't find the blueprint folder:** tell it directly: `My blueprint folder is at ~/ailoopwise-blueprint/blueprint/` (from `Install-guide.md`, troubleshooting).
+
+### Tell your AI
+
+Start a new session in your new project folder and paste this. Claude checks what episode 2 set up and changes nothing without your yes.
+
+```text
+Check the project you just set up for me. I am not a developer, so explain everything in plain words.
+1. Check that this folder contains .claude/CLAUDE.md, tasks/current.md, tasks/lessons.md and tasks/todo.md. List what is missing.
+2. List the hard rules in .claude/CLAUDE.md in three lines at most.
+3. Compare my CLAUDE.md with ~/ailoopwise-blueprint/course/examples/CLAUDE-example.md. Tell me which sections mine lacks and which of my rules are too vague ("be careful" is vague, "never email real customers" is not).
+4. Suggest better wording, but change nothing until I say yes, and only inside this project folder.
+5. Change nothing in ~/ailoopwise-blueprint. Never run git commit or git push unless I ask, and never print a password, key or token.
+```
