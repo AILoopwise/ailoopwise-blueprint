@@ -2,6 +2,12 @@
 
 Versions are dated: `vYYYY.MM.DD`, the day the release is tagged. Each release on GitHub carries the ZIP and its SHA256 checksum.
 
+## Unreleased
+
+- `/new-project` now sets up the quality checks for coding projects (Step 8): typecheck, lint, format check, unit tests and one `check` command, each proven to fail on a planted error before it counts. Before, the project template only had empty slots for these commands, and the session-end quality hook had nothing to run.
+- pnpm's 7-day delay on new package versions now goes in `pnpm-workspace.yaml` (`minimumReleaseAge: 10080`). pnpm 11 ignores it in `.npmrc` and installed packages only 3 days old.
+- Global rules: a new check counts only after it has failed once on a planted error.
+
 ## First public release
 
 - Quick start for non-developers: one prompt, three questions, a new project folder with `CLAUDE.md` and three task files.

@@ -91,15 +91,41 @@ bash "BLUEPRINT/scripts/blueprint-sync.sh" --project "PROJECT"
 
 The script records which agent and skill files came from the blueprint, so later updates can tell your changes from the blueprint's. It also adds `PROJECT` to `~/.claude/blueprint-projects`, the user's own list of projects whose quality checks may run the project's tools (lint, tests); a repo cannot add itself to that list. If `PROJECT/.claude/hooks/` exists, it also copies the hook scripts there and merges the hooks into `PROJECT/.claude/settings.json`, keeping anything already in it. Check its output for `ERROR` and report any to the user.
 
-## Step 8: MCP (optional)
+## Step 8: Quality checks and unit tests (coding, design, multi with code)
+
+The project template lists typecheck, lint, test, format check and build commands. Make them real now, before any
+feature work: a project without them has nothing that stops broken code, and the quality hook (which runs these
+commands when Claude stops) silently has nothing to run.
+
+1. Detect what exists (`package.json` scripts, `tsconfig.json`, `pyproject.toml`, `go.mod`, test folders). Keep what
+   works; add only what is missing. Use the project's package manager; for a new JavaScript/TypeScript project use pnpm.
+2. For a new pnpm project, put the 7-day delay in `PROJECT/pnpm-workspace.yaml` as `minimumReleaseAge: 10080`
+   (pnpm 11 ignores `minimum-release-age` in `.npmrc`). Check it took effect with `pnpm config get minimumReleaseAge`
+   before installing anything.
+3. Set up, with the stack the user named (JavaScript/TypeScript example in brackets):
+   - **typecheck** (`tsc --noEmit`, `strict: true`; plain `.js/.mjs` files get `checkJs` plus JSDoc types)
+   - **lint** (ESLint flat config) and **format check** (Prettier `--check`)
+   - **unit tests** (Vitest, or `node --test` for plain `.mjs`), with at least one real test of real code, each test
+     saying in a comment WHY the behaviour matters
+   - one **`check`** command that runs all of them, and write every command into `PROJECT/.claude/CLAUDE.md`
+4. **Prove each check can fail before trusting it.** Plant one deliberate error per check (a misspelled property for
+   the typecheck, an unused variable for lint, broken formatting, a wrong expected value in a test), run the check, see
+   it fail, then undo the plant. A check that passes on a planted error checks nothing: for example, `checkJs` without
+   `strict` does not catch a misspelled property on an object literal.
+5. If the project is on GitHub, offer a CI workflow that runs the same `check` (pinned action versions,
+   `permissions: contents: read`).
+6. Run `check` once at the end and report each result. If there is no code yet, set up the tools anyway and say which
+   check has nothing to test so far (for example a test runner with `passWithNoTests`).
+
+## Step 9: MCP (optional)
 
 If the user wants MCP servers, copy `BLUEPRINT/mcp/.mcp.json` to `PROJECT/.mcp.json` and keep only the servers they need. The file reads tokens from environment variables (`GITHUB_TOKEN`, `BRAVE_API_KEY`); tell the user to set those, and not to paste tokens into the file. Keep the GitHub server read-only and the package versions pinned, and do not keep `playwright` (a browser) together with a server that can write to the repo: text on a web page could then make changes there.
 
-## Step 9: First entry in current.md
+## Step 10: First entry in current.md
 
 Fill in `PROJECT/tasks/current.md`: Active Task "Project setup", the domain and packs installed under Decisions Made, and suggested first actions under Next Steps.
 
-## Step 10: Verify
+## Step 11: Verify
 
 Check with Glob and Read, all under `PROJECT/`:
 1. `.claude/CLAUDE.md` exists and has no `[placeholder]` left
@@ -107,10 +133,11 @@ Check with Glob and Read, all under `PROJECT/`:
 3. `tasks/` has current.md, lessons.md, todo.md
 4. `.claude/.blueprint` and `.claude/.blueprint-manifest` exist, and `PROJECT` is a line in `~/.claude/blueprint-projects`
 5. Hooks: either the global hooks are active, or `.claude/hooks/` has the scripts and `.claude/settings.json` lists them
+6. Coding projects: the `check` command exists, passes, and each check was shown to fail on a planted error (Step 8)
 
 Report the result, listing every file you created.
 
-## Step 11: .gitignore
+## Step 12: .gitignore
 
 If `PROJECT/.gitignore` exists, add these lines (they hold local state and tokens):
 ```
@@ -120,6 +147,6 @@ tasks/current.md
 ```
 Suggest committing everything else. To back up the working state too, the user can remove the `tasks/current.md` line.
 
-## Step 12: Onboard the user
+## Step 13: Onboard the user
 
 Run `/onboarding` to show what was installed and how to use it.
