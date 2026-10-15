@@ -32,6 +32,11 @@ Die Wand: Ein gutes PRD zu schreiben ist schwerer, als es klingt. Ein schlechtes
    mkdir -p ~/.claude/skills
    cp -r ~/ailoopwise-blueprint/blueprint/skills/new-project/ ~/.claude/skills/new-project/
    ```
+   Unter Windows ohne WSL in PowerShell (`~/.claude` ist dort `%USERPROFILE%\.claude`, [Quelle](https://code.claude.com/docs/de/settings)):
+   ```powershell
+   New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills"
+   Copy-Item -Recurse "$env:USERPROFILE\ailoopwise-blueprint\blueprint\skills\new-project" "$env:USERPROFILE\.claude\skills\new-project"
+   ```
 2. **Sprache einstellen:** In der Claude-App unter **Settings → General → Voice → Language** Deutsch wählen. Die Anzeigesprache der App ändert die Sprache des Sprachmodus nicht.
 3. **Neuer Chat, Prompt einfügen:** Kopiere den Brainstorming-Prompt aus [examples/prompt-prd-brainstorm.md](examples/prompt-prd-brainstorm.md) als erste Nachricht und schick ihn ab.
 4. **Sprachmodus starten:** Tippe im Eingabefeld auf das Schallwellen-Symbol neben dem Mikrofon und rede. Claude fragt, du antwortest. Sag „fertig“, wenn alles gesagt ist. Das Transkript bleibt im Chat.
@@ -46,7 +51,7 @@ Die Wand: Ein gutes PRD zu schreiben ist schwerer, als es klingt. Ein schlechtes
    ```
    Öffne den Ordner in VS Code, lege `PRD.md` an und füge den Block ein. Auf dem Server aus Folge 3 schickst du dir den Text und legst die Datei dort an.
 7. **Claude Code im neuen Ordner starten** (VS Code: Claude-Panel öffnen; Terminal: `cd ~/mein-projekt` und `claude --permission-mode manual`).
-8. **Diktieren einschalten** (optional): Im Terminal `/voice`, dann Leertaste halten und sprechen. Die VS-Code-Erweiterung kann das auch. Über SSH geht es nicht; dort nimmst du die Diktierfunktion deiner Handy-Tastatur.
+8. **Diktieren einschalten** (optional): Im Terminal `/voice`, dann Leertaste halten und sprechen. Ohne Einstellung schreibt die Diktierfunktion Englisch mit: Stell vorher in `/config` die Sprache (`language`) auf Deutsch; dieselbe Einstellung legt auch Claudes Antwortsprache fest ([Quelle](https://code.claude.com/docs/de/voice-dictation#change-the-dictation-language)). Die VS-Code-Erweiterung kann das auch; ist `language` leer, nimmt sie dort die VS-Code-Einstellung `accessibility.voice.speechLanguage`. Über SSH geht es nicht; dort nimmst du die Diktierfunktion deiner Handy-Tastatur.
 9. **Den Bauplan übergeben**, gesprochen oder getippt:
    ```text
    /new-project Lies PRD.md in diesem Ordner. Nimm daraus Projektname, Bereich, Beschreibung und Technik und richte das Projekt in DIESEM Ordner ein. Schreib den Abschnitt "Regeln, die die KI nie brechen darf" als feste Regeln in .claude/CLAUDE.md und die Funktionen als nummerierte Aufgaben mit Abnahmekriterium in tasks/todo.md. Frag nur nach, was im PRD fehlt.
@@ -72,7 +77,7 @@ Sprich das PRD für dein eigenes Projekt ein und speichere es als `PRD.md` in ei
 
 ## Wenn etwas hakt
 
-- **`/new-project` ist unbekannt:** Der Skill liegt nicht unter `~/.claude/skills/new-project/SKILL.md`, oder der Ordner `~/.claude/skills` existierte beim Start der Session noch nicht. Schritt 1 prüfen, dann Claude Code neu starten. Quelle: https://code.claude.com/docs/de/skills#live-change-detection
+- **`/new-project` ist unbekannt:** Der Skill liegt nicht unter `~/.claude/skills/new-project/SKILL.md`, oder der Ordner `~/.claude/skills` existierte beim Start der Session noch nicht. Schritt 1 prüfen, dann `/reload-skills` tippen oder Claude Code neu starten. Quelle: https://code.claude.com/docs/de/skills#live-change-detection
 - **`/voice` funktioniert nicht:** Diktieren braucht ein claude.ai-Konto und ein Mikrofon am selben Gerät; in SSH-Sitzungen geht es nicht. Quelle: https://code.claude.com/docs/de/voice-dictation#requirements
 - **Der Sprachmodus versteht dich schlecht oder antwortet in der falschen Sprache:** Stell die Voice-Sprache unter **Settings → General → Voice → Language** ein (Schritt 2). Andere Sprachen als Englisch sind laut Hilfe-Center noch Beta. Quelle: https://support.claude.com/en/articles/11101966-use-voice-mode
 
@@ -125,6 +130,11 @@ The wall: writing a good PRD is harder than it sounds. The AI will happily build
    mkdir -p ~/.claude/skills
    cp -r ~/ailoopwise-blueprint/blueprint/skills/new-project/ ~/.claude/skills/new-project/
    ```
+   On Windows without WSL, in PowerShell (`~/.claude` there is `%USERPROFILE%\.claude`, [source](https://code.claude.com/docs/en/settings)):
+   ```powershell
+   New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills"
+   Copy-Item -Recurse "$env:USERPROFILE\ailoopwise-blueprint\blueprint\skills\new-project" "$env:USERPROFILE\.claude\skills\new-project"
+   ```
 2. **Set the language:** in the Claude app under **Settings → General → Voice → Language**, pick the language you'll speak. The app's display language does not change the voice language.
 3. **New chat, paste the prompt:** copy the brainstorming prompt from [examples/prompt-prd-brainstorm.md](examples/prompt-prd-brainstorm.md) as the first message and send it.
 4. **Start voice mode:** tap the sound-wave icon next to the microphone in the input field and talk. Claude asks, you answer. Say "done" when everything is said. The transcript stays in the chat.
@@ -139,7 +149,7 @@ The wall: writing a good PRD is harder than it sounds. The AI will happily build
    ```
    Open the folder in VS Code, create `PRD.md` and paste the block. On the server from episode 3, send yourself the text and create the file there.
 7. **Start Claude Code in the new folder** (VS Code: open the Claude panel; terminal: `cd ~/my-project` and `claude --permission-mode manual`).
-8. **Turn on dictation** (optional): in the terminal `/voice`, then hold the space bar and speak. The VS Code extension can do this too. It doesn't work over SSH; there you use your phone keyboard's dictation.
+8. **Turn on dictation** (optional): in the terminal `/voice`, then hold the space bar and speak. Without a setting, dictation transcribes English: if you speak another language, set it first under `language` in `/config`; the same setting also sets Claude's reply language ([source](https://code.claude.com/docs/en/voice-dictation#change-the-dictation-language)). The VS Code extension can do this too; if `language` is empty, it uses VS Code's `accessibility.voice.speechLanguage` setting there. It doesn't work over SSH; there you use your phone keyboard's dictation.
 9. **Hand over the blueprint**, spoken or typed:
    ```text
    /new-project Read PRD.md in this folder. Take the project name, domain, description and tech from it and set up the project in THIS folder. Write the section "Rules the AI must never break" into .claude/CLAUDE.md as hard rules, and the features as numbered tasks with acceptance criteria into tasks/todo.md. Only ask about what the PRD is missing.
@@ -165,7 +175,7 @@ Speak the PRD for your own project and save it as `PRD.md` in a new folder.
 
 ### If something goes wrong
 
-- **`/new-project` is unknown:** the skill isn't at `~/.claude/skills/new-project/SKILL.md`, or the `~/.claude/skills` folder didn't exist when the session started. Check step 1, then restart Claude Code. Source: https://code.claude.com/docs/en/skills#live-change-detection
+- **`/new-project` is unknown:** the skill isn't at `~/.claude/skills/new-project/SKILL.md`, or the `~/.claude/skills` folder didn't exist when the session started. Check step 1, then type `/reload-skills` or restart Claude Code. Source: https://code.claude.com/docs/en/skills#live-change-detection
 - **`/voice` doesn't work:** dictation needs a claude.ai account and a microphone on the same machine; it doesn't work in SSH sessions. Source: https://code.claude.com/docs/en/voice-dictation#requirements
 - **Voice mode misunderstands you or answers in the wrong language:** set the voice language under **Settings → General → Voice → Language** (step 2). Languages other than English are still beta per the help centre. Source: https://support.claude.com/en/articles/11101966-use-voice-mode
 

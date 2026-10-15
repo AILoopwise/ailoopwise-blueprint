@@ -8,7 +8,7 @@
 - Unter-Agenten für Recherche und einen Reviewer, der deine Änderungen prüft.
 - Einen Fortsetzungs-Prompt, mit dem die nächste Session ohne Rückfragen weitermacht.
 
-Wer stundenlang in derselben Session arbeitet, verbrennt Token, und die KI wird ungenauer. Die Doku sagt es direkt: „performance degrades as it fills“ ([Quelle](https://code.claude.com/docs/de/best-practices)). Besser sind kurze Zyklen: Aufwändige Teilaufgaben gehen an Unter-Agenten, am Ende prüft ein unabhängiger Reviewer-Agent, dann lässt du dir einen Fortsetzungs-Prompt geben und löschst mit `/clear` den Verlauf. Das Wissen steckt in deinen Textdateien. Die frische Session bekommt den neuen Prompt und arbeitet ohne Altlasten weiter.
+Wer stundenlang in derselben Session arbeitet, verbrennt Token, und die KI wird ungenauer. Die Doku sagt es direkt: Das Kontextfenster füllt sich schnell, „und die Leistung verschlechtert sich, wenn es sich füllt“ ([Quelle](https://code.claude.com/docs/de/best-practices)). Besser sind kurze Zyklen: Aufwändige Teilaufgaben gehen an Unter-Agenten, am Ende prüft ein unabhängiger Reviewer-Agent, dann lässt du dir einen Fortsetzungs-Prompt geben und löschst mit `/clear` den Verlauf. Das Wissen steckt in deinen Textdateien. Die frische Session bekommt den neuen Prompt und arbeitet ohne Altlasten weiter.
 
 Die Wand: Der Workflow sitzt erst nach ein paar Wochen. Bis dahin verlierst du Sessions.
 
@@ -19,7 +19,7 @@ Die Wand: Der Workflow sitzt erst nach ein paar Wochen. Bis dahin verlierst du S
 
 ## Was du brauchst
 
-- Dein Projekt mit den Agenten aus dem Blueprint: `/new-project` legt `researcher`, `implementer` und `reviewer` unter `.claude/agents/` an.
+- Dein Projekt mit den Agenten aus dem Blueprint: `/new-project` legt `researcher`, `implementer` und `reviewer` unter `.claude/agents/` an. Fehlen sie, kopierst du die Dateien aus `~/ailoopwise-blueprint/blueprint/agents/` nach `.claude/agents/`. War der Ordner `agents` beim Start der Session noch nicht da, startest du Claude Code danach neu ([Quelle](https://code.claude.com/docs/de/sub-agents#write-subagent-files)).
 - **Den Fortsetzungs-Prompt:** [examples/prompt-continuation.md](examples/prompt-continuation.md)
 - Zum Nachlesen: Unter-Agenten https://code.claude.com/docs/de/sub-agents · Kontextfenster https://code.claude.com/docs/de/context-window · Kosten senken https://code.claude.com/docs/de/costs
 
@@ -29,7 +29,7 @@ Die Wand: Der Workflow sitzt erst nach ein paar Wochen. Bis dahin verlierst du S
    ```text
    /context
    ```
-   Du siehst, was wie viel Platz belegt, inklusive deiner CLAUDE.md.
+   Du siehst, was wie viel Platz belegt, inklusive deiner CLAUDE.md. In VS Code zeigt das Eingabefeld des Claude-Panels zusätzlich an, wie viel vom Kontextfenster belegt ist. Das Panel hat nur einen Teil der Befehle; tippe `/`, dann siehst du, welche es dort gibt ([Quelle](https://code.claude.com/docs/de/vs-code#vs-code-extension-vs-claude-code-cli)).
 2. **Eine Aufgabe pro Session.** Starte mit dem Fortsetzungs-Prompt der letzten Session oder mit:
    ```text
    Read tasks/current.md and tasks/lessons.md. Summarize where we left off.
@@ -38,12 +38,13 @@ Die Wand: Der Workflow sitzt erst nach ein paar Wochen. Bis dahin verlierst du S
    ```text
    @agent-researcher Finde heraus, wie man in Node.js signierte Abmelde-Links baut, ohne Tokens in der Datenbank zu speichern. Gib mir nur eine Zusammenfassung mit Quellen zurück, höchstens zehn Zeilen.
    ```
-   Der Unter-Agent arbeitet in seinem eigenen Kontextfenster. Zurück kommt nur die Zusammenfassung, dein Hauptfenster bleibt frei.
+   Der Unter-Agent arbeitet in seinem eigenen Kontextfenster. Zurück kommt nur die Zusammenfassung, dein Hauptfenster bleibt frei. Seine Anfragen zählen aber zum selben Nutzungslimit wie dein Hauptgespräch ([Quelle](https://code.claude.com/docs/de/sub-agents)).
 4. **Arbeiten.** Claude setzt die Aufgabe um und prüft sie (Folge 4: frag nach dem Testlauf).
 5. **Unabhängig prüfen lassen:**
    ```text
-   @agent-reviewer Prüfe alle Änderungen dieser Session (git diff). Kritische Fehler zuerst, mit Datei und Zeile. Ändere nichts.
+   @agent-reviewer Prüfe alle Änderungen dieser Session (git diff). Kritische Fehler zuerst, mit Datei und Zeile. Melde nur, was die Korrektheit oder die Anforderungen betrifft. Ändere nichts.
    ```
+   Der Satz „Melde nur …“ ist wichtig: Ein Prüfer, der Lücken suchen soll, meldet meist welche, auch wenn die Arbeit stimmt ([Quelle](https://code.claude.com/docs/de/best-practices#add-an-adversarial-review-step)).
    Der Reviewer aus dem Blueprint hat kein Edit- oder Write-Werkzeug und ist angewiesen, nichts zu ändern. Was er findet, behebst du in der Hauptsession.
 6. **Stand sichern:** Füge den Fortsetzungs-Prompt aus [examples/prompt-continuation.md](examples/prompt-continuation.md) ein. Claude aktualisiert `current.md`, `lessons.md` und `todo.md` und gibt dir einen kurzen Prompt zurück.
 7. **Kopieren, leeren, weiter:** Kopiere den Prompt, dann:
@@ -63,7 +64,7 @@ Es gibt keine nächste Folge. Beende deine nächste Session mit dem Fortsetzungs
 ## Wenn etwas hakt
 
 - **Du korrigierst Claude zum dritten Mal beim selben Problem:** Der Kontext ist voll mit gescheiterten Versuchen. `/clear` und mit einem genaueren Prompt neu anfangen, der das Gelernte enthält. Quelle: https://code.claude.com/docs/de/best-practices
-- **Nach `/clear` fehlt dir etwas aus dem alten Gespräch:** Mit `/resume` holst du es zurück. Tipp: vorher `/rename` vergeben, dann findest du es leichter. Quelle: https://code.claude.com/docs/de/commands
+- **Nach `/clear` fehlt dir etwas aus dem alten Gespräch:** Mit `/resume` holst du es zurück. Tipp: vorher `/rename` vergeben, oder gleich `/clear <name>` tippen, dann findest du es leichter. In VS Code findest du alte Gespräche über den Knopf **Session history** oben im Claude-Panel. Quellen: https://code.claude.com/docs/de/commands · https://code.claude.com/docs/de/vs-code#resume-past-conversations
 - **Claude recherchiert selbst, statt den Unter-Agenten zu nehmen:** Nur beim Namen nennen ist ein Vorschlag. Die @-Erwähnung (`@agent-researcher`) sorgt dafür, dass genau dieser Agent läuft. Quelle: https://code.claude.com/docs/de/sub-agents#invoke-subagents-explicitly
 - **In einer sehr langen Session vergisst Claude frühe Anweisungen:** Beim automatischen Zusammenfassen können Details vom Anfang verloren gehen. Dauerhafte Regeln gehören in die CLAUDE.md, nicht in den Chat. Quelle: https://code.claude.com/docs/de/how-claude-code-works
 
@@ -103,7 +104,7 @@ The wall: the workflow only clicks after a few weeks. Until then you'll lose ses
 
 ### What you need
 
-- Your project with the blueprint's agents: `/new-project` creates `researcher`, `implementer` and `reviewer` in `.claude/agents/`.
+- Your project with the blueprint's agents: `/new-project` creates `researcher`, `implementer` and `reviewer` in `.claude/agents/`. If they're missing, copy the files from `~/ailoopwise-blueprint/blueprint/agents/` to `.claude/agents/`. If the `agents` folder didn't exist when the session started, restart Claude Code afterwards ([source](https://code.claude.com/docs/en/sub-agents#write-subagent-files)).
 - **The continuation prompt:** [examples/prompt-continuation.md](examples/prompt-continuation.md)
 - For reference: subagents https://code.claude.com/docs/en/sub-agents · context window https://code.claude.com/docs/en/context-window · reducing cost https://code.claude.com/docs/en/costs
 
@@ -113,7 +114,7 @@ The wall: the workflow only clicks after a few weeks. Until then you'll lose ses
    ```text
    /context
    ```
-   You see what takes how much space, including your CLAUDE.md.
+   You see what takes how much space, including your CLAUDE.md. In VS Code, the Claude panel's prompt box also shows how much of the context window is in use. The panel has only a subset of the commands; type `/` to see which ones are there ([source](https://code.claude.com/docs/en/vs-code#vs-code-extension-vs-claude-code-cli)).
 2. **One task per session.** Start with the last session's continuation prompt, or with:
    ```text
    Read tasks/current.md and tasks/lessons.md. Summarize where we left off.
@@ -122,12 +123,13 @@ The wall: the workflow only clicks after a few weeks. Until then you'll lose ses
    ```text
    @agent-researcher Find out how to build signed unsubscribe links in Node.js without storing tokens in the database. Return only a summary with sources, ten lines at most.
    ```
-   The subagent works in its own context window. Only the summary comes back, and your main window stays free.
+   The subagent works in its own context window. Only the summary comes back, and your main window stays free. Its requests still count toward the same usage limits as your main conversation ([source](https://code.claude.com/docs/en/sub-agents)).
 4. **Do the work.** Claude implements the task and checks it (episode 4: ask for the test run).
 5. **Have it checked independently:**
    ```text
-   @agent-reviewer Review every change from this session (git diff). Critical issues first, with file and line. Do not change anything.
+   @agent-reviewer Review every change from this session (git diff). Critical issues first, with file and line. Flag only what affects correctness or the requirements. Do not change anything.
    ```
+   The "Flag only …" sentence matters: a reviewer asked to find gaps will usually report some, even when the work is sound ([source](https://code.claude.com/docs/en/best-practices#add-an-adversarial-review-step)).
    The blueprint's reviewer has no Edit or Write tool and is instructed not to change anything. You fix what it finds in the main session.
 6. **Save the state:** paste the continuation prompt from [examples/prompt-continuation.md](examples/prompt-continuation.md). Claude updates `current.md`, `lessons.md` and `todo.md` and hands you a short prompt.
 7. **Copy, clear, continue:** copy the prompt, then:
@@ -147,7 +149,7 @@ There is no next episode. End your next session with the continuation prompt and
 ### If something goes wrong
 
 - **You're correcting Claude for the third time on the same problem:** the context is full of failed attempts. `/clear` and start again with a sharper prompt that includes what you learned. Source: https://code.claude.com/docs/en/best-practices
-- **After `/clear` you're missing something from the old conversation:** `/resume` brings it back. Tip: give it a name with `/rename` first so it's easier to find. Source: https://code.claude.com/docs/en/commands
+- **After `/clear` you're missing something from the old conversation:** `/resume` brings it back. Tip: give it a name with `/rename` first, or type `/clear <name>` straight away, so it's easier to find. In VS Code you find old conversations with the **Session history** button at the top of the Claude panel. Sources: https://code.claude.com/docs/en/commands · https://code.claude.com/docs/en/vs-code#resume-past-conversations
 - **Claude researches itself instead of using the subagent:** naming it is a suggestion. The @-mention (`@agent-researcher`) makes sure exactly that agent runs. Source: https://code.claude.com/docs/en/sub-agents#invoke-subagents-explicitly
 - **In a very long session Claude forgets early instructions:** automatic summarising can drop details from the start. Permanent rules belong in CLAUDE.md, not in the chat. Source: https://code.claude.com/docs/en/how-claude-code-works
 

@@ -25,7 +25,7 @@
 - A new check counts only after it failed once on a planted error. One that passes on a planted error checks nothing.
 
 ## Dependencies (JavaScript/TypeScript)
-- New projects: pnpm, with `minimumReleaseAge: 10080` in `pnpm-workspace.yaml` (a 7-day delay on new package versions; https://pnpm.io/settings#minimumreleaseage). pnpm 11 ignores it in `.npmrc`; check with `pnpm config get minimumReleaseAge`.
+- New projects: pnpm, with `minimumReleaseAge: 10080` in `pnpm-workspace.yaml` (a 7-day delay on new package versions; https://pnpm.io/settings#minimumreleaseage). pnpm 11 ignores it in `.npmrc`. Prove it works by adding a version published today: pnpm must refuse it.
 - Existing projects: keep their package manager and install from the lockfile (`npm ci`, `yarn install --frozen-lockfile`).
 - Say so before installing or upgrading a package.
 
