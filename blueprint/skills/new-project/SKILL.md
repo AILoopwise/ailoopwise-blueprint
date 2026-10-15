@@ -100,8 +100,9 @@ commands when Claude stops) silently has nothing to run.
 1. Detect what exists (`package.json` scripts, `tsconfig.json`, `pyproject.toml`, `go.mod`, test folders). Keep what
    works; add only what is missing. Use the project's package manager; for a new JavaScript/TypeScript project use pnpm.
 2. For a new pnpm project, put the 7-day delay in `PROJECT/pnpm-workspace.yaml` as `minimumReleaseAge: 10080`
-   (pnpm 11 ignores `minimum-release-age` in `.npmrc`). Check it took effect with `pnpm config get minimumReleaseAge`
-   before installing anything.
+   (pnpm 11 ignores `minimum-release-age` in `.npmrc`). Prove it is enforced before installing anything: in a scratch
+   folder with the same file, `pnpm add <any package>@<a version published today>` must FAIL with
+   `ERR_PNPM_NO_MATURE_MATCHING_VERSION`. `pnpm config get` only shows the key is written, not that pnpm obeys it.
 3. Set up, with the stack the user named (JavaScript/TypeScript example in brackets):
    - **typecheck** (`tsc --noEmit`, `strict: true`; plain `.js/.mjs` files get `checkJs` plus JSDoc types)
    - **lint** (ESLint flat config) and **format check** (Prettier `--check`)
