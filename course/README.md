@@ -6,12 +6,12 @@ Das ist die Textanleitung zu den sechs Folgen der Videoreihe. Jede Seite ist die
 
 ## Die sechs Folgen
 
-1. [Installation](01-installation.md): Claude Code installieren, anmelden, erste Session.
-2. [Desktop einrichten](02-desktop-setup.md): VS Code, die Erweiterung und dein erstes Projekt mit einem einzigen Prompt.
-3. [Server (optional)](03-server-optional.md): Claude Code auf einem eigenen Server, abgeschottet mit Docker und Tailscale, gesteuert vom Handy.
-4. [Leitplanken](04-guardrails.md): was die Hooks wirklich blockieren, die drei Aufgabendateien, Sicherung im privaten GitHub-Repo.
-5. [Projektstart per Sprache](05-voice-kickoff-prd.md): im Sprachchat zum PRD, dann `/new-project`.
-6. [Lange Sitzungen](06-long-sessions.md): Unter-Agenten, Reviewer, Fortsetzungs-Prompt und `/clear`.
+1. [Installation](01-installation.md): Claude Code installieren, anmelden, erste Session. ▶ [Video](https://www.youtube.com/watch?v=f-yhfzPAD68)
+2. [Desktop einrichten](02-desktop-setup.md): VS Code, die Erweiterung und dein erstes Projekt mit einem einzigen Prompt. ▶ [Video](https://www.youtube.com/watch?v=wES9XDU1NVo)
+3. [Server (optional)](03-server-optional.md): Claude Code auf einem eigenen Server, abgeschottet mit Docker und Tailscale, gesteuert vom Handy. ▶ [Video](https://www.youtube.com/watch?v=ObBPulItNN4)
+4. [Leitplanken](04-guardrails.md): was die Hooks wirklich blockieren, die drei Aufgabendateien, Sicherung im privaten GitHub-Repo. ▶ [Video](https://www.youtube.com/watch?v=tI_k9HjEmEc)
+5. [Projektstart per Sprache](05-voice-kickoff-prd.md): im Sprachchat zum PRD, dann `/new-project`. ▶ [Video](https://www.youtube.com/watch?v=C0XZacdMPI4)
+6. [Lange Sitzungen](06-long-sessions.md): Unter-Agenten, Reviewer, Fortsetzungs-Prompt und `/clear`. ▶ [Video](https://www.youtube.com/watch?v=UBuTtwfR9Fs)
 
 **Folge 3 ist optional.** Alles ab Folge 4 funktioniert auch ohne Server, direkt auf deinem Laptop.
 
@@ -38,10 +38,10 @@ This is the text guide to the six episodes of the video series. Each page is the
 
 ### The six episodes
 
-1. [Install](01-installation.md): install Claude Code, sign in, first session.
-2. [Desktop setup](02-desktop-setup.md): VS Code, the extension and your first project from one single prompt.
-3. [Server (optional)](03-server-optional.md): Claude Code on a server of your own, sealed off with Docker and Tailscale, driven from your phone.
-4. [Guardrails](04-guardrails.md): what the hooks really block, the three task files, backup to a private GitHub repo.
+1. [Install](01-installation.md): install Claude Code, sign in, first session. ▶ [Video](https://www.youtube.com/watch?v=wYH6m1Xb-L0)
+2. [Desktop setup](02-desktop-setup.md): VS Code, the extension and your first project from one single prompt. ▶ [Video](https://www.youtube.com/watch?v=zxmhmv-DvVk)
+3. [Server (optional)](03-server-optional.md): Claude Code on a server of your own, sealed off with Docker and Tailscale, driven from your phone. ▶ [Video](https://www.youtube.com/watch?v=rgr99wgEwfY)
+4. [Guardrails](04-guardrails.md): what the hooks really block, the three task files, backup to a private GitHub repo. ▶ [Video](https://www.youtube.com/watch?v=1wF5h4yKLp0)
 5. [Kick-off by voice](05-voice-kickoff-prd.md): from a voice chat to a PRD, then `/new-project`.
 6. [Long sessions](06-long-sessions.md): subagents, reviewer, continuation prompt and `/clear`.
 
