@@ -81,10 +81,10 @@ blueprint/scripts/               bootstrap.sh and blueprint-sync.sh (install and
 
 ## The video series
 
-1. **Install**: install Claude Code and start it for the first time.
-2. **Desktop setup**: VS Code, the extension and this blueprint.
-3. **Server (optional)**: run Claude Code on a server of your own.
-4. **Guardrails**: hooks and rules that catch dangerous commands and leaked secrets.
+1. **Install**: install Claude Code and start it for the first time. ▶ [Video](https://www.youtube.com/watch?v=wYH6m1Xb-L0)
+2. **Desktop setup**: VS Code, the extension and this blueprint. ▶ [Video](https://www.youtube.com/watch?v=zxmhmv-DvVk)
+3. **Server (optional)**: run Claude Code on a server of your own. ▶ [Video](https://www.youtube.com/watch?v=rgr99wgEwfY)
+4. **Guardrails**: hooks and rules that catch dangerous commands and leaked secrets. ▶ [Video](https://www.youtube.com/watch?v=1wF5h4yKLp0)
 5. **Kick-off by voice**: describe a project out loud instead of typing it.
 6. **Long sessions**: context, task files, and how the AI picks up the next day.
 

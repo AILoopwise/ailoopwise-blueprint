@@ -81,12 +81,12 @@ blueprint/scripts/               bootstrap.sh und blueprint-sync.sh (Installatio
 
 ## Die Videoreihe
 
-1. **Installation**: Claude Code installieren und das erste Mal starten.
-2. **Desktop einrichten**: VS Code, die Erweiterung und dieser Blueprint.
-3. **Server (optional)**: Claude Code auf einem eigenen Server laufen lassen.
-4. **Leitplanken**: Hooks und Regeln, die gefährliche Befehle und Geheimnisse abfangen.
-5. **Projektstart per Sprache**: ein Projekt einsprechen statt eintippen.
-6. **Lange Sitzungen**: Kontext, Aufgabendateien und wie die KI am nächsten Tag weitermacht.
+1. **Installation**: Claude Code installieren und das erste Mal starten. ▶ [Video](https://www.youtube.com/watch?v=f-yhfzPAD68)
+2. **Desktop einrichten**: VS Code, die Erweiterung und dieser Blueprint. ▶ [Video](https://www.youtube.com/watch?v=wES9XDU1NVo)
+3. **Server (optional)**: Claude Code auf einem eigenen Server laufen lassen. ▶ [Video](https://www.youtube.com/watch?v=ObBPulItNN4)
+4. **Leitplanken**: Hooks und Regeln, die gefährliche Befehle und Geheimnisse abfangen. ▶ [Video](https://www.youtube.com/watch?v=tI_k9HjEmEc)
+5. **Projektstart per Sprache**: ein Projekt einsprechen statt eintippen. ▶ [Video](https://www.youtube.com/watch?v=C0XZacdMPI4)
+6. **Lange Sitzungen**: Kontext, Aufgabendateien und wie die KI am nächsten Tag weitermacht. ▶ [Video](https://www.youtube.com/watch?v=UBuTtwfR9Fs)
 
 Videos und Updates: [ailoopwise.com/de/starter](https://www.ailoopwise.com/de/starter)
 
