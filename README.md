@@ -85,8 +85,8 @@ blueprint/scripts/               bootstrap.sh and blueprint-sync.sh (install and
 2. **Desktop setup**: VS Code, the extension and this blueprint. ▶ [Video](https://www.youtube.com/watch?v=zxmhmv-DvVk)
 3. **Server (optional)**: run Claude Code on a server of your own. ▶ [Video](https://www.youtube.com/watch?v=rgr99wgEwfY)
 4. **Guardrails**: hooks and rules that catch dangerous commands and leaked secrets. ▶ [Video](https://www.youtube.com/watch?v=1wF5h4yKLp0)
-5. **Kick-off by voice**: describe a project out loud instead of typing it.
-6. **Long sessions**: context, task files, and how the AI picks up the next day.
+5. **Kick-off by voice**: describe a project out loud instead of typing it. ▶ [Video](https://www.youtube.com/watch?v=IMh6u7ytEmY)
+6. **Long sessions**: context, task files, and how the AI picks up the next day. ▶ [Video](https://www.youtube.com/watch?v=mcirz3bSBWY)
 
 Videos and updates: [ailoopwise.com/en/starter](https://www.ailoopwise.com/en/starter)
 

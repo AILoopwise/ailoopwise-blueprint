@@ -42,8 +42,8 @@ This is the text guide to the six episodes of the video series. Each page is the
 2. [Desktop setup](02-desktop-setup.md): VS Code, the extension and your first project from one single prompt. ▶ [Video](https://www.youtube.com/watch?v=zxmhmv-DvVk)
 3. [Server (optional)](03-server-optional.md): Claude Code on a server of your own, sealed off with Docker and Tailscale, driven from your phone. ▶ [Video](https://www.youtube.com/watch?v=rgr99wgEwfY)
 4. [Guardrails](04-guardrails.md): what the hooks really block, the three task files, backup to a private GitHub repo. ▶ [Video](https://www.youtube.com/watch?v=1wF5h4yKLp0)
-5. [Kick-off by voice](05-voice-kickoff-prd.md): from a voice chat to a PRD, then `/new-project`.
-6. [Long sessions](06-long-sessions.md): subagents, reviewer, continuation prompt and `/clear`.
+5. [Kick-off by voice](05-voice-kickoff-prd.md): from a voice chat to a PRD, then `/new-project`. ▶ [Video](https://www.youtube.com/watch?v=IMh6u7ytEmY)
+6. [Long sessions](06-long-sessions.md): subagents, reviewer, continuation prompt and `/clear`. ▶ [Video](https://www.youtube.com/watch?v=mcirz3bSBWY)
 
 **Episode 3 is optional.** Everything from episode 4 on also works without a server, right on your laptop.
 
